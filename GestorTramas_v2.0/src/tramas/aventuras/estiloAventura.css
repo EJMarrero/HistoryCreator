@@ -1,9 +1,0 @@
-.root {
-	-fx-background-image: url(/tramas/resources/background_wood.jpg);
-	-fx-background-size:cover;
-	-fx-font-family: 'IrishUncialfabeta-Bold';
-}
-
-.image-view{
-	-fx-image: url(https://img.blogs.es/anexom/wp-content/uploads/2014/05/google-maps.jpg);
-}

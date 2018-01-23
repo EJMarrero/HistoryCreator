@@ -37,7 +37,6 @@ public class AventurasController implements Initializable {
 	
 	//Referencia al controlador padre
 	private MainController mainController;
-	private MenuController menuController = new MenuController();
 	
 	//Modelo
 	private Aventura aventuraModel = new Aventura();
@@ -78,6 +77,7 @@ public class AventurasController implements Initializable {
     @FXML
     private ListView<Tesoros> tesorosListView;
 
+    private MenuController menuController = new MenuController();
     
 
     public AventurasController() throws IOException {
@@ -89,9 +89,9 @@ public class AventurasController implements Initializable {
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		
-		scene = new Scene(view);
+		scene = new Scene(view, 1050, 650);
+		
 		view.setTop(menuController.getMenuPrincipal());
-	
 		
 		aventuraModel.nombreProperty().bind(tituloAventuraText.textProperty());
 		
@@ -257,7 +257,6 @@ public class AventurasController implements Initializable {
 	public void show(Stage parentStage) { 
 		scene.getStylesheets().add(getClass().getResource("styleAventura.css").toExternalForm());
 		parentStage.setScene(scene);
-		parentStage.setFullScreen(false);
 		parentStage.setFullScreenExitHint("");
 		parentStage.setResizable(false);
 		parentStage.show();

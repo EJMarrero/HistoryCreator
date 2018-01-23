@@ -268,10 +268,7 @@ public class MainController implements Initializable {
 
 	@FXML
 	void onBorrarMapaButtonAction(ActionEvent event) {
-
-		//Que te comas la troleada hijo puta
 		campania.get().setMapaCampania(null);
-		/* QUE NO QUE NO */
 	}
 
 	@FXML

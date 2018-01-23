@@ -43,7 +43,6 @@ public class MenuController implements Initializable {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("MenuView.fxml"));
 		loader.setController(this);
 		loader.load();
-//		initialize(null, null);
 	}
 	
 	@Override
