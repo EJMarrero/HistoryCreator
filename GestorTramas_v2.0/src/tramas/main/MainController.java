@@ -268,7 +268,8 @@ public class MainController implements Initializable {
 
 	@FXML
 	void onBorrarMapaButtonAction(ActionEvent event) {
-		mapaImage.setImage(null);
+		//mapaImage.setImage(null);
+		campania.get().setMapaCampania(null);
 	}
 
 	@FXML
