@@ -1,0 +1,69 @@
+.root {
+	-fx-background-image: url(/tramas/resources/background_wood.jpg);
+	-fx-background-size:cover;
+	-fx-font-family: 'IrishUncialfabeta-Bold';
+	
+}
+
+.mapaImage{
+	-fx-background-size: 50%;
+}
+
+.izquierdaPane{
+	-fx-background-image: url(/tramas/resources/menuPane.jpg);
+	-fx-background-size: stretch;
+}
+
+.titulos{
+	-fx-background-color: rgb(192,192,192);
+	-fx-border-color: grey;
+	-fx-border-radius: 3px;
+	-fx-background-color: radial-gradient( focus-angle 0.0deg, focus-distance 0.0%, center 50.0% 50.0%, radius 100.0%, reflect, rgb(128,51,77) 0.0, rgb(0,0,0) 100.0 );
+	-fx-padding: 8px;
+	-fx-background-radius: 5px;
+	
+	-fx-text-fill: white;
+	-fx-font-size: 12px;
+	
+}
+
+
+.zonaDeMapa{
+	-fx-background-image: url(/tramas/resources/pergamino.png);
+	-fx-background-position: center;
+	-fx-background-repeat: no-repeat;
+	-fx-background-size: stretch;
+}
+
+.split-pane:horizontal > .split-pane-divider {
+   -fx-background-color: transparent;
+}
+
+.list-view{
+	-fx-background-color: rgb(0,0,0),radial-gradient( focus-angle 0.0deg, focus-distance 0.0%, center 50.0% 50.0%, radius 100.0%, rgb(255,255,255) 0.0, rgb(56,14,35) 100.0 );
+	-fx-border-color: black;
+}
+
+.list-cell{
+	-fx-text-fill: black;
+}
+
+
+.list-cell:filled:selected:focused, .list-cell:filled:selected {
+    -fx-background-color: radial-gradient( focus-angle 0.0deg, focus-distance 0.0%, center 50.0% 50.0%, radius 100.0%, rgb(255,255,255) 0.0, rgb(77,77,77) 100.0 );
+    -fx-text-fill: white;
+}
+
+.list-cell:even { /* <=== changed to even */
+    -fx-background-color: white;
+}
+
+.list-cell:filled:hover {
+    -fx-background-color: rgb(64,0,0);
+    -fx-text-fill: white;
+}
+
+.personajesListView{
+	-fx-background-color: transparent;
+	-fx-border-color: transparent;
+}
