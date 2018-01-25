@@ -200,6 +200,7 @@
    <bottom>
       <HBox fx:id="AtrasHBOX" alignment="BOTTOM_RIGHT" spacing="10.0" BorderPane.alignment="CENTER">
          <children>
+            <Button mnemonicParsing="false" onAction="#onLimpiarAventuraButtonAction" text="Limpiar" />
             <Button fx:id="guardarAventuraButon" mnemonicParsing="false" onAction="#onGuardarAventuraButtonAction" text="Guardar Aventura" />
             <Button mnemonicParsing="false" onAction="#onBackAction" text="Atrás" />
          </children>

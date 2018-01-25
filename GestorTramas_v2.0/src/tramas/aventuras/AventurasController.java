@@ -7,6 +7,7 @@ import java.util.ResourceBundle;
 
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -39,7 +40,6 @@ public class AventurasController implements Initializable {
 	private MainController mainController;
 	
 	//Modelo
-	private Aventura aventuraModel = new Aventura();
 	private ObjectProperty<Aventura> aventura = new SimpleObjectProperty<>(this, "aventura");
 	private ObjectProperty<NPC> npcSeleccionado = new SimpleObjectProperty<>(this, "npcSeleccionado");
 	private ObjectProperty<Encuentro> encuentroSeleccionado = new SimpleObjectProperty<>(this, "encuentroSeleccionado");
@@ -59,8 +59,6 @@ public class AventurasController implements Initializable {
     aniadirNotaAventuraButton, verNotaAventuraButton, borrarNotaAventuraButton, abrirTesoroButton, verTesoroButton, borrarTesoroButton,
     compendioButton,  onRollButton, guardarAventuraButon;
 
-    @FXML
-    private VBox NPCVBox;
 
     @FXML
     private ListView<NPC> npcsListView;
@@ -93,18 +91,12 @@ public class AventurasController implements Initializable {
 		
 		view.setTop(menuController.getMenuPrincipal());
 		
-		aventuraModel.nombreProperty().bind(tituloAventuraText.textProperty());
-		
-		npcsListView.itemsProperty().bind(aventuraModel.pnjsProperty());
 		npcSeleccionado.bind(npcsListView.getSelectionModel().selectedItemProperty());
-		
-		encuentrosListView.itemsProperty().bind(aventuraModel.encuentrosProperty());
 		encuentroSeleccionado.bind(encuentrosListView.getSelectionModel().selectedItemProperty());
-		
-		notasAventuraListView.itemsProperty().bind(aventuraModel.notasProperty());
 		notaSeleccionada.bind(notasAventuraListView.getSelectionModel().selectedItemProperty());
 		
-		
+		aventura.addListener((o, ov, nv) -> onAventuraChanged(o, ov, nv));
+		aventura.set(new Aventura());
 	}
 	
 	
@@ -112,7 +104,22 @@ public class AventurasController implements Initializable {
 	
 	
 
-    @FXML
+    private void onAventuraChanged(ObservableValue<? extends Aventura> o, Aventura ov, Aventura nv) {
+		if(ov != null) {
+			aventura.get().nombreProperty().unbind();
+			aventura.get().encuentrosProperty().unbind();
+			aventura.get().pnjsProperty().unbind();
+			aventura.get().notasProperty().unbind();
+		}
+		if (nv != null) {
+			tituloAventuraText.textProperty().bindBidirectional(nv.nombreProperty());
+			npcsListView.itemsProperty().bindBidirectional(nv.pnjsProperty());
+			encuentrosListView.itemsProperty().bindBidirectional(nv.encuentrosProperty());
+			notasAventuraListView.itemsProperty().bindBidirectional(nv.notasProperty());
+		}
+	}
+
+	@FXML
     void onAbrirTesoroButtonAction(ActionEvent event) {
 
     }
@@ -144,7 +151,7 @@ public class AventurasController implements Initializable {
     	NotasCampañaController controllerNotasCampania = new NotasCampañaController();
     	Nota nueva = controllerNotasCampania.show(GestorApp.getPrimaryStage());
 		if (nueva.getTexto() !=null && nueva.getTitulo()!=null) {
-			aventuraModel.getNotas().add(nueva);
+			aventura.get().getNotas().add(nueva);
 		}
     }
 
@@ -244,7 +251,23 @@ public class AventurasController implements Initializable {
     
     @FXML
     void onGuardarAventuraButtonAction(ActionEvent event) throws IOException {
-    	mainController.getCampania().getAventuras().add(aventuraModel);
+//    	mainController.getCampania().getAventuras().add(aventura.get());
+    	
+    	Aventura a = new Aventura();
+    	a.setNombre(aventura.get().getNombre());
+    	a.setEncuentros(aventura.get().getEncuentros());
+    	a.setPnjs(aventura.get().getPnjs());
+    	a.setNotas(aventura.get().getNotas());
+    	mainController.getCampania().getAventuras().add(a);
+    	mainController.show(GestorApp.getPrimaryStage());
+    }
+    
+    @FXML
+    void onLimpiarAventuraButtonAction (ActionEvent event) throws IOException {
+    	tituloAventuraText.setText("");
+    	npcsListView.getItems().clear();
+    	encuentrosListView.getItems().clear();
+    	notasAventuraListView.getItems().clear();
     	
     }
     
