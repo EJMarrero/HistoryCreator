@@ -38,6 +38,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.image.PixelWriter;
 import javafx.scene.image.WritableImage;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.shape.Rectangle;
@@ -56,12 +57,14 @@ import tramas.model.Personaje;
 import tramas.notasCampaña.NotasCampañaController;
 
 public class MainController implements Initializable {
-	
+
 	// Vista
 	private Stage stage;
 	private Scene scene;
 	@FXML
 	private BorderPane view;
+	@FXML
+	private VBox zonaMapa;
 	@FXML
 	private ImageView mapaImage;
 	@FXML
@@ -72,30 +75,30 @@ public class MainController implements Initializable {
 
 	@FXML
 	private ListView<Personaje> personajesCampaniaList;
-	
+
 	@FXML
-	private Button abrirNotasCampaniaButton, compendioButton, aniadirNotasCampaniaButton, borrarNotasCampaniaButton, guardarAventurasButton,
-	aniadirAventurasButton, verAventurasButton, borrarAventurasButton, guardarMapaButton, expandirMapaButton, borrarMapaButton,
-	aniadirMapaButton, guardarPersonajesButton, aniadirPersonajesButton, verPersonajesButton, borrarPersonajesButton, tesorosButton;
+	private Button abrirNotasCampaniaButton, compendioButton, aniadirNotasCampaniaButton, borrarNotasCampaniaButton,
+			guardarAventurasButton, aniadirAventurasButton, verAventurasButton, borrarAventurasButton,
+			guardarMapaButton, expandirMapaButton, borrarMapaButton, aniadirMapaButton, importarPersonajesButton,
+			aniadirPersonajesButton, verPersonajesButton, borrarPersonajesButton, tesorosButton;
 
 	public BorderPane getView() {
 		return view;
 	}
-	
-	//SubControladores
+
+	// SubControladores
 	private AventurasController aventuraController = new AventurasController();
 	private MenuController menuController = new MenuController();
 	private MapaCampaniaController mapaController = new MapaCampaniaController();
 	private NotasCampañaController notasCampañaController = new NotasCampañaController();
-	
+
 	// Modelo
-//	private Campania campaniaModel = new Campania();
+	// private Campania campaniaModel = new Campania();
 	private ObjectProperty<Campania> campania = new SimpleObjectProperty<>(this, "campania");
 	private ObjectProperty<Nota> notaSeleccionada = new SimpleObjectProperty<>(this, "notaSeleccionada");
 	private ListProperty<Nota> listaNotas = new SimpleListProperty<>(this, "listaNotas");
 	private ObjectProperty<Aventura> aventuraSeleccionada = new SimpleObjectProperty<>(this, "aventuraSeleccionada");
 	private ObjectProperty<Personaje> personajeSeleccionado = new SimpleObjectProperty<>(this, "personajeSeleccionado");
-
 
 	public MainController() throws IOException {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("MainView.fxml"));
@@ -105,25 +108,22 @@ public class MainController implements Initializable {
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-	
-		
+
 		aventuraController.setMainController(this);
 		mapaController.setMainController(this);
 		notasCampañaController.setMainController(this);
 		menuController.setMainController(this);
-		
+
 		view.setTop(menuController.getMenuPrincipal());
-		
-//		notasCampaniaList.itemsProperty().bind(listaNotas);
-		
-		
-//		notasCampaniaList.itemsProperty().bind(campania.get().notasProperty());
-//		aventurasCampaniaList.itemsProperty().bind(campaniaModel.aventurasProperty());
-//		personajesCampaniaList.itemsProperty().bind(campaniaModel.personajesProperty());
-//		mapaImage.imageProperty().bind(campaniaModel.mapaCampaniaProperty().get().imagenProperty());
-//		campaniaModel.mapaCampaniaProperty().bind(mapaImage.imageProperty());
+		// mapaImage.fitWidthProperty().bind(zonaMapa.widthProperty());
+		// mapaImage.fitHeightProperty().bind(zonaMapa.heightProperty());
+		// notasCampaniaList.itemsProperty().bind(listaNotas);
 
-
+		// notasCampaniaList.itemsProperty().bind(campania.get().notasProperty());
+		// aventurasCampaniaList.itemsProperty().bind(campaniaModel.aventurasProperty());
+		// personajesCampaniaList.itemsProperty().bind(campaniaModel.personajesProperty());
+		// mapaImage.imageProperty().bind(campaniaModel.mapaCampaniaProperty().get().imagenProperty());
+		// campaniaModel.mapaCampaniaProperty().bind(mapaImage.imageProperty());
 
 		notaSeleccionada.bind(notasCampaniaList.getSelectionModel().selectedItemProperty());
 		aventuraSeleccionada.bind(aventurasCampaniaList.getSelectionModel().selectedItemProperty());
@@ -136,62 +136,60 @@ public class MainController implements Initializable {
 		verAventurasButton.disableProperty().bind(aventuraSeleccionada.isNull());
 		borrarAventurasButton.disableProperty().bind(aventuraSeleccionada.isNull());
 
-		guardarPersonajesButton.disableProperty().bind(personajeSeleccionado.isNull());
+		importarPersonajesButton.disableProperty().bind(personajeSeleccionado.isNull());
 		verPersonajesButton.disableProperty().bind(personajeSeleccionado.isNull());
 		borrarPersonajesButton.disableProperty().bind(personajeSeleccionado.isNull());
 
-//		BooleanBinding desactivarMapa = campania.get().mapaCampaniaProperty().isNull();
-//		guardarMapaButton.disableProperty().bind(desactivarMapa);
-//		expandirMapaButton.disableProperty().bind(desactivarMapa);
-//		borrarMapaButton.disableProperty().bind(desactivarMapa);
-		
-		EventHandler<Event> efectoButton = new EventHandler<Event>() {		
+		// BooleanBinding desactivarMapa =
+		// campania.get().mapaCampaniaProperty().isNull();
+		// guardarMapaButton.disableProperty().bind(desactivarMapa);
+		// expandirMapaButton.disableProperty().bind(desactivarMapa);
+		// borrarMapaButton.disableProperty().bind(desactivarMapa);
+
+		EventHandler<Event> efectoButton = new EventHandler<Event>() {
 			@Override
 			public void handle(Event event) {
 				Media sound = new Media(new File("botoneffecto.mp3").toURI().toString());
 				MediaPlayer mediaPlayer = new MediaPlayer(sound);
 				mediaPlayer.setVolume(0.2);
-				mediaPlayer.play();				
+				mediaPlayer.play();
 			}
 		};
-		
+
 		aniadirNotasCampaniaButton.setOnMouseClicked(efectoButton);
 		aniadirAventurasButton.setOnMouseClicked(efectoButton);
 		aniadirPersonajesButton.setOnMouseClicked(efectoButton);
 		aniadirMapaButton.setOnMouseClicked(efectoButton);
-		
-		
+
 		campania.addListener((o, ov, nv) -> onCampaniaChanged(o, ov, nv));
 		campania.set(new Campania());
 
 	}
 
-
-
 	private void onCampaniaChanged(ObservableValue<? extends Campania> o, Campania ov, Campania nv) {
 		if (ov != null) {
-			notasCampaniaList.itemsProperty().unbind();
-			aventurasCampaniaList.itemsProperty().unbind();
-			personajesCampaniaList.itemsProperty().unbind();
-			mapaImage.imageProperty().unbind();
+			notasCampaniaList.itemsProperty().unbindBidirectional(ov.notasProperty());
+			aventurasCampaniaList.itemsProperty().unbindBidirectional(ov.aventurasProperty());
+			personajesCampaniaList.itemsProperty().unbindBidirectional(ov.personajesProperty());
+			mapaImage.imageProperty().unbindBidirectional(ov.mapaCampaniaProperty());
 		}
 		if (nv != null) {
-			notasCampaniaList.itemsProperty().bind(nv.notasProperty());
-			aventurasCampaniaList.itemsProperty().bind(nv.aventurasProperty());
-			personajesCampaniaList.itemsProperty().bind(nv.personajesProperty());
-//			campania.get().mapaCampaniaProperty().bind(nv.mapaCampaniaProperty());
-			mapaImage.imageProperty().bind(nv.mapaCampaniaProperty());
+			notasCampaniaList.itemsProperty().bindBidirectional(nv.notasProperty());
+			aventurasCampaniaList.itemsProperty().bindBidirectional(nv.aventurasProperty());
+			personajesCampaniaList.itemsProperty().bindBidirectional(nv.personajesProperty());
+			// campania.get().mapaCampaniaProperty().bind(nv.mapaCampaniaProperty());
+			mapaImage.imageProperty().bindBidirectional(nv.mapaCampaniaProperty());
 		}
 	}
 
 	@FXML
 	void onAbrirMenuItemAction(ActionEvent event) {
-		
+
 	}
 
 	@FXML
 	void onAniadirAventurasButtonAction(ActionEvent event) throws IOException {
-		
+		aventuraController.setAventura(new Aventura());
 		aventuraController.show(GestorApp.getPrimaryStage());
 	}
 
@@ -199,43 +197,42 @@ public class MainController implements Initializable {
 	void onAniadirMapaButtonAction(ActionEvent event) throws IOException {
 		FileChooser fChooser = new FileChooser();
 		fChooser.setTitle("Cargar imagen");
-		FileChooser.ExtensionFilter extFilterJPG = new FileChooser.ExtensionFilter("Archivos de imagen(*.jpg o *.png)", "*.jpg", "*.png");
+		FileChooser.ExtensionFilter extFilterJPG = new FileChooser.ExtensionFilter("Archivos de imagen(*.jpg o *.png)",
+				"*.jpg", "*.png");
 		fChooser.getExtensionFilters().add(extFilterJPG);
 		File imageFile = fChooser.showOpenDialog(stage);
 		Image image = new Image(imageFile.toURI().toString());
-		
-//		ByteArrayOutputStream bos = new ByteArrayOutputStream();
-//		BufferedImage bf = ImageIO.read(imageFile);
-//		ImageIO.write(bf, "jpg", bos);
-//		byte[] imageBytes = bos.toByteArray();
-//		Base64Encoder encoder = new Base64Serializer(null, null);
-		
-		//Reconstruye la imagen
-//		BufferedImage bf = ImageIO.read(imageFile);
-//		WritableImage wr = new WritableImage(bf.getWidth(), bf.getHeight());
-//		PixelWriter pw = wr.getPixelWriter();
-//		for (int i = 0; i < bf.getWidth(); i++) {
-//			for (int j = 0; j < bf.getHeight(); j++) {
-//				pw.setArgb(i, j, bf.getRGB(i,j));
-//			}
-//			
-//		}
+
+		// ByteArrayOutputStream bos = new ByteArrayOutputStream();
+		// BufferedImage bf = ImageIO.read(imageFile);
+		// ImageIO.write(bf, "jpg", bos);
+		// byte[] imageBytes = bos.toByteArray();
+		// Base64Encoder encoder = new Base64Serializer(null, null);
+
+		// Reconstruye la imagen
+		// BufferedImage bf = ImageIO.read(imageFile);
+		// WritableImage wr = new WritableImage(bf.getWidth(), bf.getHeight());
+		// PixelWriter pw = wr.getPixelWriter();
+		// for (int i = 0; i < bf.getWidth(); i++) {
+		// for (int j = 0; j < bf.getHeight(); j++) {
+		// pw.setArgb(i, j, bf.getRGB(i,j));
+		// }
+		//
+		// }
 		campania.get().setMapaCampania(image);
-		
-		
-		
+
 	}
 
 	@FXML
 	void onAniadirNotasCampaniaButtonAction(ActionEvent event) throws IOException {
 		NotasCampañaController controllerNotasCampania = new NotasCampañaController();
 		Nota nueva = controllerNotasCampania.show(GestorApp.getPrimaryStage());
-		if (nueva.getTexto() !=null && nueva.getTitulo()!=null) {
-//			campaniaModel.getNotas().add(nueva);
+		if (nueva.getTexto() != null && nueva.getTitulo() != null) {
+			// campaniaModel.getNotas().add(nueva);
 			campania.get().getNotas().add(nueva);
 		}
 	}
-	
+
 	@FXML
 	void onAbrirNotasCampaniaButtonAction(ActionEvent event) throws IOException {
 		NotasCampañaController controllerNotasCampania = new NotasCampañaController();
@@ -303,12 +300,12 @@ public class MainController implements Initializable {
 
 	@FXML
 	void onExpandirMapaButtonAction(ActionEvent event) {
-//		mapaController.setImagen(mapaImage.getImage());
+		// mapaController.setImagen(mapaImage.getImage());
 		mapaController.getContenedorMapa().setImage(mapaImage.getImage());
 		System.out.println(mapaImage.getImage().toString());
-//		System.out.println(mapaController.getImagen().toString());
+		// System.out.println(mapaController.getImagen().toString());
 		mapaController.show(GestorApp.getPrimaryStage());
-		
+
 	}
 
 	@FXML
@@ -326,10 +323,8 @@ public class MainController implements Initializable {
 
 	}
 
-	
-
 	@FXML
-	void onGuardarPersonajesButtonAction(ActionEvent event) {
+	void onImportarPersonajesButtonAction(ActionEvent event) {
 
 	}
 
@@ -345,6 +340,7 @@ public class MainController implements Initializable {
 
 	@FXML
 	void onVerAventurasButtonAction(ActionEvent event) {
+		aventuraController.setAventura(aventuraSeleccionada.get().clonar());
 		aventuraController.show(GestorApp.getPrimaryStage());
 	}
 
@@ -352,33 +348,27 @@ public class MainController implements Initializable {
 	void onVerPersonajesButtonAction(ActionEvent event) {
 
 	}
-	
+
 	public void show(Stage parentStage) {
 		scene = GestorApp.getScene();
 		scene.getStylesheets().add(getClass().getResource("mainStyle.css").toExternalForm());
 		parentStage.setScene(scene);
-		parentStage.setFullScreen(false);
+		parentStage.setFullScreen(true);
+		// parentStage.setMaximized(true);
 		parentStage.show();
-		
-		
+
 	}
-	
-	
-	
 
 	public final ObjectProperty<Campania> campaniaProperty() {
 		return this.campania;
 	}
-	
 
 	public final Campania getCampania() {
 		return this.campaniaProperty().get();
 	}
-	
 
 	public final void setCampania(final Campania campania) {
 		this.campaniaProperty().set(campania);
 	}
-	
 
 }

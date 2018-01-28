@@ -1,5 +1,8 @@
 package tramas.model;
 
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlType;
+
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -7,6 +10,7 @@ import javafx.beans.property.StringProperty;
 import javafx.scene.image.Image;
 import tramas.model.roll.Ficha;
 
+@XmlType
 public class NPC {
 
 	private StringProperty nombre;
@@ -31,7 +35,7 @@ public class NPC {
 		return this.nombre;
 	}
 	
-
+	@XmlAttribute
 	public final String getNombre() {
 		return this.nombreProperty().get();
 	}
@@ -42,48 +46,48 @@ public class NPC {
 	}
 	
 
-	public final ObjectProperty<javafx.scene.image.Image> portraitProperty() {
-		return this.portrait;
-	}
-	
-
-	public final Image getPortrait() {
-		return this.portraitProperty().get();
-	}
-	
-
-	public final void setPortrait(final Image portrait) {
-		this.portraitProperty().set(portrait);
-	}
-	
-
-	public final ObjectProperty<Ficha> fichaProperty() {
-		return this.ficha;
-	}
-	
-
-	public final Ficha getFicha() {
-		return this.fichaProperty().get();
-	}
-	
-
-	public final void setFicha(final Ficha ficha) {
-		this.fichaProperty().set(ficha);
-	}
-
-	public ObjectProperty<Tesoros> tesoroDropeableProperty() {
-		return this.tesoroDropeable;
-	}
-	
-
-	public Tesoros getTesoroDropeable() {
-		return this.tesoroDropeableProperty().get();
-	}
-	
-
-	public void setTesoroDropeable(final Tesoros tesoroDropeable) {
-		this.tesoroDropeableProperty().set(tesoroDropeable);
-	}
+//	public final ObjectProperty<javafx.scene.image.Image> portraitProperty() {
+//		return this.portrait;
+//	}
+//	
+//
+//	public final Image getPortrait() {
+//		return this.portraitProperty().get();
+//	}
+//	
+//
+//	public final void setPortrait(final Image portrait) {
+//		this.portraitProperty().set(portrait);
+//	}
+//	
+//
+//	public final ObjectProperty<Ficha> fichaProperty() {
+//		return this.ficha;
+//	}
+//	
+//
+//	public final Ficha getFicha() {
+//		return this.fichaProperty().get();
+//	}
+//	
+//
+//	public final void setFicha(final Ficha ficha) {
+//		this.fichaProperty().set(ficha);
+//	}
+//
+//	public ObjectProperty<Tesoros> tesoroDropeableProperty() {
+//		return this.tesoroDropeable;
+//	}
+//	
+//
+//	public Tesoros getTesoroDropeable() {
+//		return this.tesoroDropeableProperty().get();
+//	}
+//	
+//
+//	public void setTesoroDropeable(final Tesoros tesoroDropeable) {
+//		this.tesoroDropeableProperty().set(tesoroDropeable);
+//	}
 	
 	
 	@Override

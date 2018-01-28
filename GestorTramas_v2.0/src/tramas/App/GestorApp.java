@@ -30,7 +30,7 @@ public class GestorApp extends Application {
 		Font.loadFont(GestorApp.class.getResource("IrishUncialfabeta-Bold.ttf").toExternalForm(), 10);
 
 		primaryStage.setTitle("GestorTramas_v.2.0");
-		scene = new Scene(controller.getView(), 1050, 650);
+		scene = new Scene(controller.getView(), 1650, 750);
 		
 		// INICIALIZAR AUDIO 
 		  
@@ -44,9 +44,11 @@ public class GestorApp extends Application {
 
 		scene.getStylesheets().add(getClass().getResource("/tramas/main/mainStyle.css").toExternalForm());
 		primaryStage.setFullScreenExitHint("");
-		primaryStage.setResizable(false);
-		primaryStage.centerOnScreen();
+//		primaryStage.setMaxHeight(768);
+//		primaryStage.setMaxWidth(1366);
 		primaryStage.setScene(scene);
+		primaryStage.setFullScreen(true);
+//		primaryStage.setMaximized(true);
 		primaryStage.show();
 
 	}
@@ -64,6 +66,8 @@ public class GestorApp extends Application {
 	public static Scene getScene() {
 		return scene;
 	}
+	
+
 
 	public static void main(String[] args) {
 		launch(args);

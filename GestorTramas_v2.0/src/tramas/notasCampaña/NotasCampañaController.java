@@ -37,6 +37,7 @@ import javafx.stage.Stage;
 import tramas.editorImagen.EditorImagen;
 import tramas.main.MainController;
 import tramas.model.Nota;
+import tramas.model.adapter.ImageUtils;
 
 public class NotasCampañaController implements Initializable {
 	
@@ -131,12 +132,15 @@ public class NotasCampañaController implements Initializable {
 		rectangle = EditorImagen.redimensionarArchivo(imageFile);
 		imagenPane.setCenter(rectangle);
 		aux=imageFile;
+		
     }
 	
 		
 	@FXML
     void onAgregarNotaButtonAction(ActionEvent event) throws FileNotFoundException {
-		cajaEditor.setHtmlText(cajaEditor.getHtmlText()+"<img src=\""+ aux.toURI()+  " \"width=\""+rectangle.getWidth()+"\"+ height=\""+rectangle.getHeight()+"\" >");
+		Image image = new Image(aux.toURI().toString());
+//		cajaEditor.setHtmlText(cajaEditor.getHtmlText()+"<img src=\""+ aux.toURI()+  " \"width=\""+rectangle.getWidth()+"\"+ height=\""+rectangle.getHeight()+"\" >");
+		cajaEditor.setHtmlText(cajaEditor.getHtmlText()+"<img src=\""+"data:image/png;base64,"+ImageUtils.encodeImage(image) +  " \"width=\""+rectangle.getWidth()+"\"+ height=\""+rectangle.getHeight()+"\" >");
     }
 	
     @FXML
