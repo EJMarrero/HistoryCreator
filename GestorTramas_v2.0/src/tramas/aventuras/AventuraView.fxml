@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane fx:id="view" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+   <center>
+      <BorderPane nodeOrientation="LEFT_TO_RIGHT" styleClass="contenidoAventura">
+         <left>
+            <VBox alignment="BOTTOM_CENTER" spacing="10.0" BorderPane.alignment="CENTER">
+               <BorderPane.margin>
+                  <Insets top="10.0" />
+               </BorderPane.margin>
+               <children>
+                  <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS">
+                     <children>
+                        <VBox fx:id="AventuraVBOX" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="5.0" styleClass="AventuraPane" HBox.hgrow="ALWAYS">
+                           <children>
+                              <TextField fx:id="tituloAventuraText" alignment="CENTER" maxWidth="150.0" promptText="Título de la aventura" />
+                              <ImageView fx:id="portraitImage" fitHeight="300.0" fitWidth="300.0" pickOnBounds="true" preserveRatio="true" styleClass="imagenAventura" VBox.vgrow="ALWAYS">
+                                 <image>
+                                    <Image url="@../resources/1.png" />
+                                 </image>
+                              </ImageView>
+                              <HBox alignment="CENTER" spacing="10.0">
+                                 <children>
+                                    <Button fx:id="cambiarPortraitAventuraButton" mnemonicParsing="false" onAction="#onCambiarPortraitAventuraButtonAction" text="Añadir" />
+                                    <Button fx:id="borrarPortraitAventuraButton" mnemonicParsing="false" onAction="#onBorrarPortraitAventuraButton" text="Borrar" />
+                                 </children>
+                                 <padding>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </padding>
+                              </HBox>
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+                  <HBox layoutX="10.0" layoutY="10.0" spacing="10.0">
+                     <children>
+                        <VBox spacing="10.0">
+                           <children>
+                              <Label styleClass="titulosAventura" text="Encuentros" />
+                              <ListView fx:id="encuentrosListView" styleClass="listViewAventura" />
+                              <HBox alignment="CENTER" spacing="10.0">
+                                 <children>
+                                    <Button fx:id="aniadirEncuentroButton" mnemonicParsing="false" onAction="#onAniadirEncuentroButtonAction" text="Añadir" />
+                                    <Button fx:id="verEncuentroButton" mnemonicParsing="false" onAction="#onVerEncuentroButtonAction" text="Ver" />
+                                    <Button fx:id="borrarEncuentroButton" mnemonicParsing="false" onAction="#onBorrarEncuentroButtonAction" text="Borrar" />
+                                 </children>
+                                 <padding>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </padding>
+                              </HBox>
+                           </children>
+                        </VBox>
+                        <VBox fx:id="NotasAventuraVBox" spacing="10.0">
+                           <children>
+                              <Label styleClass="titulosAventura" text="Notas de la Aventura" />
+                              <ListView fx:id="notasAventuraListView" styleClass="listViewAventura" />
+                              <HBox alignment="CENTER" spacing="10.0">
+                                 <children>
+                                    <Button fx:id="aniadirNotaAventuraButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onAniadirNotaAventuraButtonAction" text="Añadir" />
+                                    <Button fx:id="verNotaAventuraButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onVerNotaAventuraButtonAction" text="Ver" />
+                                    <Button fx:id="borrarNotaAventuraButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onBorrarNotaAventuraButtonAction" text="Borrar" />
+                                 </children>
+                                 <padding>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </padding>
+                              </HBox>
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+               </children>
+               <padding>
+                  <Insets left="10.0" right="15.0" />
+               </padding>
+            </VBox>
+         </left>
+         <center>
+            <VBox alignment="TOP_CENTER" BorderPane.alignment="CENTER">
+               <children>
+                  <HBox alignment="TOP_CENTER" spacing="10.0" VBox.vgrow="ALWAYS">
+                     <children>
+                        <VBox fx:id="TablerosVBox" alignment="TOP_CENTER" spacing="10.0" HBox.hgrow="NEVER">
+                           <children>
+                              <Label styleClass="titulosAventura" text="Tableros" />
+                              <ListView fx:id="tableroListView" prefHeight="247.0" prefWidth="248.0" styleClass="listViewAventura" />
+                              <HBox alignment="CENTER" spacing="10.0">
+                                 <children>
+                                    <Button fx:id="aniadirTableroButton" mnemonicParsing="false" onAction="#onAniadirTableroButtonAction" text="Añadir" />
+                                    <Button fx:id="borrarTableroButton" mnemonicParsing="false" onAction="#onBorrarTableroButtonAction" text="Borrar" />
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
+                        <VBox fx:id="MapaVBox" alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="10.0" styleClass="imagenPergamino" HBox.hgrow="ALWAYS">
+                           <children>
+                              <Label styleClass="titulosAventura" text="NOMBRE DE LA IMAGEN" />
+                              <ImageView fx:id="tableroImagen" fitHeight="300.0" fitWidth="600.0" pickOnBounds="true" preserveRatio="true" VBox.vgrow="ALWAYS">
+                                 <image>
+                                    <Image url="@../resources/1.png" />
+                                 </image>
+                              </ImageView>
+                              <HBox alignment="CENTER">
+                                 <children>
+                                    <Button fx:id="expandirImagenTableroButton" mnemonicParsing="false" onAction="#onExpandirImagenTableroButtonAction" text="Expandir" />
+                                 </children>
+                                 <padding>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </padding>
+                              </HBox>
+                           </children>
+                        </VBox>
+                     </children>
+                     <padding>
+                        <Insets bottom="10.0" />
+                     </padding>
+                  </HBox>
+                  <HBox fx:id="ZonaDerechaHBox" alignment="BOTTOM_LEFT" spacing="10.0">
+                     <children>
+                        <VBox alignment="CENTER" />
+                        <VBox fx:id="NPCVBox" spacing="10.0" HBox.hgrow="ALWAYS">
+                           <children>
+                              <Label styleClass="titulosAventura" text="NPC's" />
+                              <ListView fx:id="npcsListView" styleClass="listViewAventura" />
+                              <HBox alignment="CENTER" spacing="10.0">
+                                 <children>
+                                    <Button fx:id="aniadirNPCButton" mnemonicParsing="false" onAction="#onAniadirNPCButtonAction" text="Añadir" />
+                                    <Button fx:id="verNPCButton" mnemonicParsing="false" onAction="#onVerNPCButtonAction" text="Ver" />
+                                    <Button fx:id="borrarNPCButton" mnemonicParsing="false" onAction="#onBorrarNPCButtonAction" text="Borrar" />
+                                 </children>
+                                 <padding>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </padding>
+                              </HBox>
+                           </children>
+                        </VBox>
+                        <VBox fx:id="TesorosVBox" spacing="10.0">
+                           <children>
+                              <Label styleClass="titulosAventura" text="Tesoros" />
+                              <ListView fx:id="tesorosListView" styleClass="listViewAventura" />
+                              <HBox alignment="CENTER" spacing="10.0">
+                                 <children>
+                                    <Button fx:id="abrirTesoroButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onAbrirTesoroButtonAction" text="Abrir" />
+                                    <Button fx:id="borrarTesoroButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onBorrarTesoroButtonAction" text="Borrar" />
+                                    <Button fx:id="verTesoroButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onVerTesoroButtonAction" text="Ver" />
+                                 </children>
+                                 <padding>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </padding>
+                              </HBox>
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+               </children>
+               <BorderPane.margin>
+                  <Insets top="10.0" />
+               </BorderPane.margin>
+               <padding>
+                  <Insets right="10.0" />
+               </padding>
+            </VBox>
+         </center>
+         <BorderPane.margin>
+            <Insets />
+         </BorderPane.margin>
+      </BorderPane>
+   </center>
+   <bottom>
+      <HBox fx:id="AtrasHBOX" alignment="BOTTOM_RIGHT" spacing="10.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button fx:id="onRollButton" mnemonicParsing="false" onAction="#onRollButtonAction" text="ROLL" HBox.hgrow="ALWAYS" />
+            <Button fx:id="compendioButton" mnemonicParsing="false" onAction="#onCompendioButtonAction" text="COMPENDIO" />
+            <Button mnemonicParsing="false" onAction="#onLimpiarAventuraButtonAction" text="Limpiar" />
+            <Button fx:id="guardarAventuraButon" mnemonicParsing="false" onAction="#onGuardarAventuraButtonAction" text="Guardar Aventura" />
+            <Button mnemonicParsing="false" onAction="#onBackAction" text="Atrás" />
+         </children>
+         <BorderPane.margin>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </BorderPane.margin>
+      </HBox>
+   </bottom>
+</BorderPane>

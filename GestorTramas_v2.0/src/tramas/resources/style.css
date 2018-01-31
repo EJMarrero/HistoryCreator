@@ -1,0 +1,158 @@
+@font-face {
+    font-family: IrishUncialfabeta-Bold;
+    src: url('IrishUncialfabeta-Bold.ttf');
+}
+
+.root {
+	-fx-background-image: url(background_wood.jpg);
+	-fx-background-size:cover;
+	-fx-font-family: IrishUncialfabeta-Bold;
+}
+
+.titulosAventura{
+	-fx-background-color: rgb(192,192,192);
+	-fx-border-color: grey;
+	-fx-border-radius: 3px;
+	-fx-background-color: radial-gradient( focus-angle 0.0deg, focus-distance 0.0%, center 50.0% 50.0%, radius 100.0%, reflect, rgb(128,51,77) 0.0, rgb(0,0,0) 100.0 );
+	-fx-padding: 8px;
+	-fx-background-radius: 5px;
+	-fx-text-fill: white;
+	-fx-font-size: 12px;
+}
+
+
+.listViewAventura{
+	-fx-background-color: rgb(0,0,0),radial-gradient( focus-angle 0.0deg, focus-distance 0.0%, center 50.0% 50.0%, radius 100.0%, rgb(255,255,255) 0.0, rgb(56,14,35) 100.0 );
+	-fx-border-color: black;
+}
+
+.imagenAventura{
+	-fx-background-color: rgb(0,255,255);
+}
+
+
+/* PARA CAMBIAR LAS PROPIEDADES DE UN TEXT AREA, ES NECESARIO TRABAJAR SOBRE TODOS SUS NODOS HIJOS */
+.tituloAventura {
+    -fx-background-color: transparent;
+}
+
+.tituloAventura .scroll-pane {
+    -fx-background-color: transparent;
+}
+
+.tituloAventura .scroll-pane .viewport{
+    -fx-background-color: transparent;
+}
+
+
+.tituloAventura .scroll-pane .content{
+    -fx-background-color: transparent;
+}
+
+.tituloAventura *.text {
+    -fx-text-alignment: center;
+}
+
+
+
+.imagenPergamino{
+	-fx-background-image: url(pergamino.png);
+	-fx-background-size: stretch;
+}
+
+.AventuraPane{
+	-fx-background-image: url(bg_AventurasMin.jpg);
+	-fx-background-size: stretch;
+	
+}
+
+
+.izquierdaPane{
+	-fx-background-image: url(menuPane.jpg);
+	-fx-background-size: stretch;
+}
+
+.titulos{
+	-fx-background-color: rgb(192,192,192);
+	-fx-border-color: grey;
+	-fx-border-radius: 3px;
+	-fx-background-color: radial-gradient( focus-angle 0.0deg, focus-distance 0.0%, center 50.0% 50.0%, radius 100.0%, reflect, rgb(128,51,77) 0.0, rgb(0,0,0) 100.0 );
+	-fx-padding: 8px;
+	-fx-background-radius: 5px;
+	
+	-fx-text-fill: white;
+	-fx-font-size: 12px;
+	
+}
+
+
+.zonaDeMapa{
+	-fx-background-image: url(pergamino.png);
+	-fx-background-size: stretch;
+}
+
+.split-pane:horizontal > .split-pane-divider {
+   -fx-background-color: transparent;
+}
+
+.list-view{
+	-fx-background-color: rgb(0,0,0),radial-gradient( focus-angle 0.0deg, focus-distance 0.0%, center 50.0% 50.0%, radius 100.0%, rgb(255,255,255) 0.0, rgb(56,14,35) 100.0 );
+	-fx-border-color: black;
+}
+
+.list-cell{
+	-fx-text-fill: black;
+}
+
+
+.list-cell:filled:selected:focused, .list-cell:filled:selected {
+    -fx-background-color: radial-gradient( focus-angle 0.0deg, focus-distance 0.0%, center 50.0% 50.0%, radius 100.0%, rgb(255,255,255) 0.0, rgb(77,77,77) 100.0 );
+    -fx-text-fill: white;
+}
+
+.list-cell:even { /* <=== changed to even */
+    -fx-background-color: white;
+}
+
+.list-cell:filled:hover {
+    -fx-background-color: rgb(64,0,0);
+    -fx-text-fill: white;
+}
+
+.contenedorListaPersonajesPane{
+	-fx-background-image: url(menuPane.jpg);
+	-fx-background-size: stretch;
+}
+
+.personajesListView{
+	-fx-background-color: transparent;
+	-fx-border-color: transparent;
+}
+
+.botonesTablero {
+    -fx-padding: 8 15 15 15;
+    -fx-background-insets: 0,0 0 5 0, 0 0 6 0, 0 0 7 0;
+    -fx-background-radius: 4;
+    -fx-background-color: 
+        linear-gradient(from 0% 93% to 0% 100%,  #33001a 0%, #1a000d 100%),
+        #4d0019,
+	 	#4d0028,
+        radial-gradient( focus-angle 0.0deg, focus-distance 0.0%, center 50.0% 50.0%, radius 100.0%, reflect, rgb(128,51,77) 0.0, rgb(0,0,0) 100.0 );
+    -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.75) , 4,0,0,1 );
+    -fx-font-weight: bold;
+    -fx-font-size: 1.1em;
+    -fx-text-fill: white;
+
+}
+.botonesTablero:hover {
+    -fx-background-color: 
+        linear-gradient(from 0% 93% to 0% 100%,  #33001a 0%, #1a000d 100%),
+         #4d0019,
+        #4d0028,
+        radial-gradient( focus-angle 0.0deg, focus-distance 0.0%, center 50.0% 50.0%, radius 100.0%, reflect, rgb(125,40,100) 0.0, rgb(0,0,0) 100.0 );
+}
+.botonesTablero:pressed {
+    -fx-padding: 10 15 13 15;
+    -fx-background-insets: 2 0 0 0,2 0 3 0, 2 0 4 0, 2 0 5 0;
+}
+
