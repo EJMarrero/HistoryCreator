@@ -17,56 +17,43 @@ import javafx.scene.control.MenuBar;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import tramas.App.GestorApp;
-import tramas.main.MainController;
+import tramas.App.MainController;
+import tramas.campania.CampaniaController;
 import tramas.model.Campania;
 
 public class MenuController implements Initializable {
 
 	private MainController mainController;
-	
-	//Modelo
-	private ObjectProperty<Campania> campania = new SimpleObjectProperty<>(this, "campania");
-	
-	
-	public MainController getMainController() {
-		return mainController;
-	}
 
-	public void setMainController(MainController mainController) {
-		this.mainController = mainController;
-	}
+	// modelo
+	private ObjectProperty<Campania> campania = new SimpleObjectProperty<>(this, "campania", new Campania());
 
 	@FXML
 	private MenuBar menuPrincipal;
-	
+
 	public MenuController() throws IOException {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("MenuView.fxml"));
 		loader.setController(this);
 		loader.load();
 	}
-	
+
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		
+	}
 
-		
-	}
-	
-	public MenuBar getMenuPrincipal() {
-		return menuPrincipal;
-	}
-	
-    @FXML
-    void onAbrirMenuItemAction(ActionEvent event) {
+	@FXML
+	void onAbrirMenuItemAction(ActionEvent event) {
 		try {
 			// abre el diálogo para abrir un fichero
 			FileChooser abrirDialog = new FileChooser();
 			abrirDialog.setInitialDirectory(new File("."));
 			abrirDialog.getExtensionFilters().add(new ExtensionFilter("Archivo XML (*.xml)", "*.xml"));
 			File fichero = abrirDialog.showOpenDialog(GestorApp.getPrimaryStage());
-			// comprueba si se seleccionó un fichero en el diálogo (File) o se canceló (null)
+			// comprueba si se seleccionó un fichero en el diálogo (File) o se canceló
+			// (null)
 			if (fichero != null) {
-				mainController.setCampania(Campania.load(fichero));
+				campania.set(Campania.load(fichero));
 			}
 		} catch (Exception e1) {
 			e1.printStackTrace();
@@ -78,26 +65,25 @@ public class MenuController implements Initializable {
 			error.setContentText(e1.getMessage());
 			error.showAndWait();
 		}
-    }
+	}
 
-    @FXML
-    void onGuardarMenuItemAction(ActionEvent event) {
+	@FXML
+	void onGuardarMenuItemAction(ActionEvent event) {
 		try {
 			// abre el diálogo para guardar un fichero
 			FileChooser guardarDialog = new FileChooser();
 			guardarDialog.setInitialDirectory(new File("."));
 			guardarDialog.getExtensionFilters().add(new ExtensionFilter("Archivo XML (*.xml)", "*.xml"));
 			File fichero = guardarDialog.showSaveDialog(GestorApp.getPrimaryStage());
-			// comprueba si se seleccionó un fichero en el diálogo (File) o se canceló (null)			
+			// comprueba si se seleccionó un fichero en el diálogo (File) o se canceló
+			// (null)
 			if (fichero != null) {
 				// se guarda el historial en el fichero indicado
-//				campania.get().save(fichero);
-				mainController.getCampania().save(fichero);
-//				mainController.getCampania().save(fichero);
+				campania.get().save(fichero);
 			}
 		} catch (Exception e1) {
 			e1.printStackTrace();
-			// muestra un diálogo con el error			
+			// muestra un diálogo con el error
 			Alert error = new Alert(AlertType.ERROR);
 			error.initOwner(GestorApp.getPrimaryStage());
 			error.setTitle("Guardar historial");
@@ -105,16 +91,41 @@ public class MenuController implements Initializable {
 			error.setContentText(e1.getMessage());
 			error.showAndWait();
 		}
-    }
+	}
 
-    @FXML
-    void onNuevoMenuItemAction(ActionEvent event) {
-    	
-    }
+	@FXML
+	void onNuevoMenuItemAction(ActionEvent event) {
 
-    @FXML
-    void onSalirMenuItemAction(ActionEvent event) {
+	}
 
-    }
+	@FXML
+	void onSalirMenuItemAction(ActionEvent event) {
+
+	}
+
+	public void setMainController(MainController mainController) {
+		this.mainController = mainController;
+	}
+	
+	public MenuBar getMenuPrincipal() {
+		return menuPrincipal;
+	}
+
+	public final ObjectProperty<Campania> campaniaProperty() {
+		return this.campania;
+	}
+	
+
+	public final Campania getCampania() {
+		return this.campaniaProperty().get();
+	}
+	
+
+	public final void setCampania(final Campania campania) {
+		this.campaniaProperty().set(campania);
+	}
+	
+	
+	
 
 }

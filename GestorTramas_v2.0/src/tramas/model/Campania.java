@@ -10,6 +10,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlMimeType;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import javafx.beans.property.ListProperty;
 import javafx.beans.property.ObjectProperty;
@@ -20,6 +21,7 @@ import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.image.Image;
+import tramas.model.adapter.ImageAdapter;
 
 
 @XmlRootElement
@@ -178,6 +180,7 @@ public class Campania {
 
 
 	@XmlElement
+	@XmlJavaTypeAdapter(ImageAdapter.class)
 	public final Image getMapaCampania() {
 		return this.mapaCampaniaProperty().get();
 	}

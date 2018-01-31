@@ -12,13 +12,13 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-import tramas.main.MainController;
+import tramas.campania.CampaniaController;
 import tramas.menu.MenuController;
 
 public class MapaCampaniaController implements Initializable {
 	
 	//Referencia al controlador padre
-	private MainController mainController;
+	private CampaniaController mainController;
 	private MenuController menuController = new MenuController();
 	
 	@FXML
@@ -60,7 +60,7 @@ public class MapaCampaniaController implements Initializable {
 		contenedorMapa.setImage(imagen);
 	}
 
-	public void setMainController(MainController mainController) {
+	public void setMainController(CampaniaController mainController) {
 		this.mainController=mainController;
 		
 	}
