@@ -31,10 +31,13 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import tramas.App.GestorApp;
-import tramas.main.MainController;
+import tramas.App.MainController;
+import tramas.campania.CampaniaController;
 import tramas.menu.MenuController;
 import tramas.model.Aventura;
+import tramas.model.Campania;
 import tramas.model.Encuentro;
 import tramas.model.Mapa;
 import tramas.model.NPC;
@@ -56,8 +59,11 @@ public class AventurasController implements Initializable {
 	private ObjectProperty<Encuentro> encuentroSeleccionado = new SimpleObjectProperty<>(this, "encuentroSeleccionado");
 	private ObjectProperty<Nota> notaSeleccionada = new SimpleObjectProperty<>(this, "notaSeleccionada");
 	private ObjectProperty<Mapa> tableroSeleccionado = new SimpleObjectProperty<>(this, "tableroSeleccionado");
+	
+	private ObjectProperty<Campania> campania = new SimpleObjectProperty<>(this, "campania");
 
 	
+	// View
 	private Stage stageCrearTablero;
 	private Scene scene;
 	@FXML
@@ -89,7 +95,7 @@ public class AventurasController implements Initializable {
     @FXML
     private ListView<Tesoros> tesorosListView;
 
-    private MenuController menuController = new MenuController();
+    
     
 
     public AventurasController() throws IOException {
@@ -102,7 +108,7 @@ public class AventurasController implements Initializable {
 	public void initialize(URL arg0, ResourceBundle arg1) {
 
 		scene = new Scene(view, 1650, 750);
-		view.setTop(menuController.getMenuPrincipal());
+//		view.setTop(menuController.getMenuPrincipal());
 		
 		tableroController.setMainController(this);
 		
@@ -210,8 +216,10 @@ public class AventurasController implements Initializable {
     	capa.setPrefWidth(300);
     	capa.setPrefHeight(300);
     	capa.getChildren().add(tableroController.getView());
-    	capa.setStyle("-fx-background-color: rgba(0, 100, 100, 0.5); -fx-background-radius: 10;");
+    	capa.setStyle("-fx-background-color: rgba(0, 0, 0, 0.9); -fx-background-radius: 10; ");
     	stageCrearTablero.setScene(new Scene(capa));
+    	stageCrearTablero.initStyle(StageStyle.UNDECORATED);
+    	stageCrearTablero.initOwner(GestorApp.getPrimaryStage());
     	stageCrearTablero.show();
     	
     	
@@ -327,10 +335,8 @@ public class AventurasController implements Initializable {
     
     @FXML
     void onGuardarAventuraButtonAction(ActionEvent event) throws IOException {
-//    	mainController.getCampania().getAventuras().add(aventura.get());
-    	
-    	mainController.getCampania().getAventuras().add(aventura.get().clonar());
-    	mainController.show(GestorApp.getPrimaryStage());
+    	campania.get().getAventuras().add(aventura.get().clonar());
+    	mainController.irACampania();
     }
     
     @FXML
@@ -347,21 +353,17 @@ public class AventurasController implements Initializable {
     
     @FXML
     void onBackAction(ActionEvent event) throws IOException {
-    	mainController.show(GestorApp.getPrimaryStage());
-
+    	mainController.irACampania();
     }
     
-	public void show(Stage parentStage) { 
-		scene.getStylesheets().add(getClass().getResource("styleAventura.css").toExternalForm());
-		parentStage.setScene(scene);
-		parentStage.setFullScreen(true);
-//		parentStage.setMaximized(true);
-		parentStage.show();
-		
-	}
-	
-
-
+//	public void show(Stage parentStage) { 
+//		scene.getStylesheets().add(getClass().getResource("styleAventura.css").toExternalForm());
+//		parentStage.setScene(scene);
+//		parentStage.setFullScreen(true);
+////		parentStage.setMaximized(true);
+//		parentStage.show();
+//		
+//	}
 
 	public BorderPane getView() {
 		return view;
@@ -389,6 +391,21 @@ public class AventurasController implements Initializable {
 	public Stage getStageCrearTablero() {
 		return stageCrearTablero;
 	}
+
+	public final ObjectProperty<Campania> campaniaProperty() {
+		return this.campania;
+	}
+	
+
+	public final Campania getCampania() {
+		return this.campaniaProperty().get();
+	}
+	
+
+	public final void setCampania(final Campania campania) {
+		this.campaniaProperty().set(campania);
+	}
+	
 
 
 	

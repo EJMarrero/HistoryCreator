@@ -1,4 +1,4 @@
-package tramas.mapacampania;
+package tramas.campania.mapa;
 
 import java.io.IOException;
 import java.net.URL;

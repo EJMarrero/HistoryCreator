@@ -34,15 +34,15 @@ import javafx.scene.web.HTMLEditor;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import tramas.campania.CampaniaController;
 import tramas.editorImagen.EditorImagen;
-import tramas.main.MainController;
 import tramas.model.Nota;
 import tramas.model.adapter.ImageUtils;
 
 public class NotasCampañaController implements Initializable {
 	
 	//Referencia al controlador padre
-	private MainController mainController;
+	private CampaniaController mainController;
 	
 
 
@@ -171,7 +171,7 @@ public class NotasCampañaController implements Initializable {
 		this.notaDevuelta.setTitulo(notaDevuelta.getTitulo());
 	}
 
-	public void setMainController(MainController mainController) {
+	public void setMainController(CampaniaController mainController) {
 		this.mainController=mainController;
 		
 	}

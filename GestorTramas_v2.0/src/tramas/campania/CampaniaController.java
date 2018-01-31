@@ -1,19 +1,11 @@
-package tramas.main;
+package tramas.campania;
 
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-import java.util.Base64;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
-import javax.imageio.ImageIO;
-
-import org.apache.axis.encoding.ser.Base64Serializer;
-
-import javafx.beans.binding.BooleanBinding;
 import javafx.beans.property.ListProperty;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleListProperty;
@@ -25,8 +17,6 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Scene;
-import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
@@ -35,20 +25,14 @@ import javafx.scene.control.ListView;
 import javafx.scene.image.Image;
 //import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.image.PixelWriter;
-import javafx.scene.image.WritableImage;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
-import javafx.scene.shape.Rectangle;
 import javafx.stage.FileChooser;
-import javafx.stage.Stage;
 import tramas.App.GestorApp;
-import tramas.aventuras.AventurasController;
-import tramas.editorImagen.EditorImagen;
+import tramas.App.MainController;
 import tramas.mapacampania.MapaCampaniaController;
-import tramas.menu.MenuController;
 import tramas.model.Aventura;
 import tramas.model.Campania;
 //import tramas.model.Mapa;
@@ -56,11 +40,12 @@ import tramas.model.Nota;
 import tramas.model.Personaje;
 import tramas.notasCampaña.NotasCampañaController;
 
-public class MainController implements Initializable {
+public class CampaniaController implements Initializable {
+
+	// controlador padre
+	private MainController mainController;
 
 	// Vista
-	private Stage stage;
-	private Scene scene;
 	@FXML
 	private BorderPane view;
 	@FXML
@@ -82,26 +67,21 @@ public class MainController implements Initializable {
 			guardarMapaButton, expandirMapaButton, borrarMapaButton, aniadirMapaButton, importarPersonajesButton,
 			aniadirPersonajesButton, verPersonajesButton, borrarPersonajesButton, tesorosButton;
 
-	public BorderPane getView() {
-		return view;
-	}
-
 	// SubControladores
-	private AventurasController aventuraController = new AventurasController();
-	private MenuController menuController = new MenuController();
 	private MapaCampaniaController mapaController = new MapaCampaniaController();
 	private NotasCampañaController notasCampañaController = new NotasCampañaController();
 
 	// Modelo
 	// private Campania campaniaModel = new Campania();
 	private ObjectProperty<Campania> campania = new SimpleObjectProperty<>(this, "campania");
+
 	private ObjectProperty<Nota> notaSeleccionada = new SimpleObjectProperty<>(this, "notaSeleccionada");
 	private ListProperty<Nota> listaNotas = new SimpleListProperty<>(this, "listaNotas");
 	private ObjectProperty<Aventura> aventuraSeleccionada = new SimpleObjectProperty<>(this, "aventuraSeleccionada");
 	private ObjectProperty<Personaje> personajeSeleccionado = new SimpleObjectProperty<>(this, "personajeSeleccionado");
 
-	public MainController() throws IOException {
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("MainView.fxml"));
+	public CampaniaController() throws IOException {
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("CampaniaView.fxml"));
 		loader.setController(this);
 		loader.load();
 	}
@@ -109,21 +89,8 @@ public class MainController implements Initializable {
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 
-		aventuraController.setMainController(this);
 		mapaController.setMainController(this);
 		notasCampañaController.setMainController(this);
-		menuController.setMainController(this);
-
-		view.setTop(menuController.getMenuPrincipal());
-		// mapaImage.fitWidthProperty().bind(zonaMapa.widthProperty());
-		// mapaImage.fitHeightProperty().bind(zonaMapa.heightProperty());
-		// notasCampaniaList.itemsProperty().bind(listaNotas);
-
-		// notasCampaniaList.itemsProperty().bind(campania.get().notasProperty());
-		// aventurasCampaniaList.itemsProperty().bind(campaniaModel.aventurasProperty());
-		// personajesCampaniaList.itemsProperty().bind(campaniaModel.personajesProperty());
-		// mapaImage.imageProperty().bind(campaniaModel.mapaCampaniaProperty().get().imagenProperty());
-		// campaniaModel.mapaCampaniaProperty().bind(mapaImage.imageProperty());
 
 		notaSeleccionada.bind(notasCampaniaList.getSelectionModel().selectedItemProperty());
 		aventuraSeleccionada.bind(aventurasCampaniaList.getSelectionModel().selectedItemProperty());
@@ -162,7 +129,6 @@ public class MainController implements Initializable {
 		aniadirMapaButton.setOnMouseClicked(efectoButton);
 
 		campania.addListener((o, ov, nv) -> onCampaniaChanged(o, ov, nv));
-		campania.set(new Campania());
 
 	}
 
@@ -189,8 +155,7 @@ public class MainController implements Initializable {
 
 	@FXML
 	void onAniadirAventurasButtonAction(ActionEvent event) throws IOException {
-		aventuraController.setAventura(new Aventura());
-		aventuraController.show(GestorApp.getPrimaryStage());
+		mainController.irAAventura(new Aventura());
 	}
 
 	@FXML
@@ -200,7 +165,7 @@ public class MainController implements Initializable {
 		FileChooser.ExtensionFilter extFilterJPG = new FileChooser.ExtensionFilter("Archivos de imagen(*.jpg o *.png)",
 				"*.jpg", "*.png");
 		fChooser.getExtensionFilters().add(extFilterJPG);
-		File imageFile = fChooser.showOpenDialog(stage);
+		File imageFile = fChooser.showOpenDialog(GestorApp.getPrimaryStage());
 		Image image = new Image(imageFile.toURI().toString());
 
 		// ByteArrayOutputStream bos = new ByteArrayOutputStream();
@@ -340,22 +305,11 @@ public class MainController implements Initializable {
 
 	@FXML
 	void onVerAventurasButtonAction(ActionEvent event) {
-		aventuraController.setAventura(aventuraSeleccionada.get().clonar());
-		aventuraController.show(GestorApp.getPrimaryStage());
+		mainController.irAAventura(aventuraSeleccionada.get().clonar());
 	}
 
 	@FXML
 	void onVerPersonajesButtonAction(ActionEvent event) {
-
-	}
-
-	public void show(Stage parentStage) {
-		scene = GestorApp.getScene();
-		scene.getStylesheets().add(getClass().getResource("mainStyle.css").toExternalForm());
-		parentStage.setScene(scene);
-		parentStage.setFullScreen(true);
-		// parentStage.setMaximized(true);
-		parentStage.show();
 
 	}
 
@@ -369,6 +323,14 @@ public class MainController implements Initializable {
 
 	public final void setCampania(final Campania campania) {
 		this.campaniaProperty().set(campania);
+	}
+
+	public void setMainController(MainController mainController) {
+		this.mainController = mainController;
+	}
+
+	public BorderPane getView() {
+		return view;
 	}
 
 }
