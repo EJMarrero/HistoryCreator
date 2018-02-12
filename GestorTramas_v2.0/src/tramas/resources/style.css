@@ -1,12 +1,18 @@
 @font-face {
-    font-family: Irish;
-    src: url('IrishUncialfabeta-Bold.ttf');
+    font-family: IrishUncialfabeta-Bold;
+    src: url('IrishUncialfabeta-Bold.ttf');  
 }
+
+@font-face {
+	font-family: Cold-Crush;
+	src: url('ColdCrush.ttf');
+}
+
 
 .root {
 	-fx-background-image: url(background_wood.jpg);
 	-fx-background-size:cover;
-	-fx-font-family: Irish;
+	-fx-font-family: IrishUncialfabeta-Bold;
 }
 
 .titulosAventura{
@@ -20,10 +26,6 @@
 	-fx-font-size: 12px;
 }
 
-.contenidoAventura{
-	-fx-background-image: url(backgroundAventuras.jpg);
-	-fx-background-size: stretch ;
-}
 
 .listViewAventura{
 	-fx-background-color: rgb(0,0,0),radial-gradient( focus-angle 0.0deg, focus-distance 0.0%, center 50.0% 50.0%, radius 100.0%, rgb(255,255,255) 0.0, rgb(56,14,35) 100.0 );
@@ -70,9 +72,6 @@
 	
 }
 
-.mapaImage{
-	/*-fx-background-size: 50%;*/
-}
 
 .izquierdaPane{
 	-fx-background-image: url(menuPane.jpg);
@@ -95,8 +94,6 @@
 
 .zonaDeMapa{
 	-fx-background-image: url(pergamino.png);
-	/*-fx-background-position: center;*/
-	/*-fx-background-repeat: no-repeat;*/
 	-fx-background-size: stretch;
 }
 
@@ -105,8 +102,9 @@
 }
 
 .list-view{
+	-fx-border-color: transparent;
+	-fx-background-radius: 6px;
 	-fx-background-color: rgb(0,0,0),radial-gradient( focus-angle 0.0deg, focus-distance 0.0%, center 50.0% 50.0%, radius 100.0%, rgb(255,255,255) 0.0, rgb(56,14,35) 100.0 );
-	-fx-border-color: black;
 }
 
 .list-cell{
@@ -137,5 +135,101 @@
 	-fx-background-color: transparent;
 	-fx-border-color: transparent;
 }
+
+.button {
+	-fx-background-color: 
+        #090a0c,
+        linear-gradient(#38424b 0%, #1f2429 20%, #191d22 100%),
+        linear-gradient(#20262b, #191d22),
+        radial-gradient(center 50% 0%, radius 100%, rgba(114,131,148,0.9), rgba(255,255,255,0));
+    -fx-background-radius: 5,4,3,5;
+    -fx-background-insets: 0,1,2,0;
+    -fx-text-fill: white;
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
+    -fx-text-fill: linear-gradient(white, #d0d0d0);
+    -fx-padding: 5 10 5 10;
+}
+.button:pressed {
+    -fx-padding: 5 7 6 7;
+    -fx-background-insets: 2 0 0 0,2 0 3 0, 2 0 4 0, 2 0 5 0;
+}
+
+.button:hover{
+	-fx-background-color:
+        linear-gradient(#38424b, #38424b),
+        radial-gradient(center 50% -40%, radius 200%, #38424b 45%, #38424b 50%);
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.4) , 5, 0.0 , 0 , 1 );
+}
+
+.botonesTablero {
+    -fx-padding: 8 15 15 15;
+    -fx-background-insets: 0,0 0 5 0, 0 0 6 0, 0 0 7 0;
+    -fx-background-radius: 4;
+    -fx-background-color: 
+        linear-gradient(from 0% 93% to 0% 100%,  #33001a 0%, #1a000d 100%),
+        #4d0019,
+	 	#4d0028,
+        radial-gradient( focus-angle 0.0deg, focus-distance 0.0%, center 50.0% 50.0%, radius 100.0%, reflect, rgb(128,51,77) 0.0, rgb(0,0,0) 100.0 );
+    -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.75) , 4,0,0,1 );
+    -fx-font-weight: bold;
+    -fx-font-size: 1.1em;
+    -fx-text-fill: white;
+
+}
+.botonesTablero:hover {
+    -fx-background-color: 
+        linear-gradient(from 0% 93% to 0% 100%,  #33001a 0%, #1a000d 100%),
+         #4d0019,
+        #4d0028,
+        radial-gradient( focus-angle 0.0deg, focus-distance 0.0%, center 50.0% 50.0%, radius 100.0%, reflect, rgb(125,40,100) 0.0, rgb(0,0,0) 100.0 );
+}
+.botonesTablero:pressed {
+    -fx-padding: 10 15 13 15;
+    -fx-background-insets: 2 0 0 0,2 0 3 0, 2 0 4 0, 2 0 5 0;
+}
+
+.tituloCampania{
+	-fx-font-family: 'Arial';
+	-fx-text-fill: white;
+	-fx-font-size: 16px;
+	-fx-background-color: transparent;
+}
+
+.atrasPane{
+	-fx-background-image: url(maderaBanner.png);
+	-fx-background-size: stretch;
+	-fx-padding: 10px, 0px, 10px, 0px;
+}
+
+.textura{
+	-fx-background-image: url(MoquetitaChachi.png);
+	-fx-background-size: stretch;
+	-fx-background-repeat: no-repeat;
+	-fx-effect: dropshadow( gaussian , rgba(0,0,0,0.75) , 4,0,0,1 );
+}
+
+.menu-bar{
+	-fx-background-color: black;
+}
+
+.tituloAventuraPane{
+	-fx-background-image: url(chapita.png);
+	-fx-background-size: stretch;
+	-fx-text-fill: black;
+	-fx-font-family:'ColdCrush';
+}
+
+.tituloAventuraPane:hover{
+	-fx-effect: dropshadow( gaussian , rgba(0,0,0,0.75) , 4,0,0,1 );
+
+}
+
+.tituloAventuraPane:focused{
+	-fx-effect: dropshadow( gaussian , rgba(0,23,0,0.75) , 4,0,0,1 );
+}
+
+
+
+
 
 

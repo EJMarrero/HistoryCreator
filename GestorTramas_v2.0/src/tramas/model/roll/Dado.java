@@ -1,5 +1,7 @@
 package tramas.model.roll;
 
+import java.util.ArrayList;
+
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
@@ -7,19 +9,13 @@ public class Dado {
 
 	private IntegerProperty cantidad;
 	private IntegerProperty caras;
-	private IntegerProperty resultado;
-	
-	public Dado ( ) {
+	private IntegerProperty total;
+
+	public Dado() {
 		cantidad = new SimpleIntegerProperty(this, "cantidad");
 		caras = new SimpleIntegerProperty(this, "caras");
-		resultado = new SimpleIntegerProperty(this, "resultado");
-	}
+		total = new SimpleIntegerProperty(this, "total");
 
-	public Dado roll () {
-		Dado dado = new Dado();
-		int resultado = ((int)Math.random()*dado.getCaras()+1)*dado.getCantidad();
-		dado.setResultado(resultado);
-		return dado;
 	}
 
 	public IntegerProperty cantidadProperty() {
@@ -46,16 +42,53 @@ public class Dado {
 		this.carasProperty().set(caras);
 	}
 
-	public IntegerProperty resultadoProperty() {
-		return this.resultado;
+	public final IntegerProperty totalProperty() {
+		return this.total;
 	}
 
-	public int getResultado() {
-		return this.resultadoProperty().get();
+	public final int getTotal() {
+		return this.totalProperty().get();
 	}
 
-	public void setResultado(final int resultado) {
-		this.resultadoProperty().set(resultado);
+	public final void setTotal(final int total) {
+		this.totalProperty().set(total);
 	}
-	
+
+	public int getTiradaSimple() {
+		return (int) (Math.random() * getCaras() + 1) * getCantidad();
+	}
+
+	public String getTiradaMultiple() {
+		return rollResultadoDesglosado();
+	}
+
+	private ArrayList<Integer> desglose() {
+		ArrayList<Integer> resultados = new ArrayList<>();
+		for (int i = 0; i < getCantidad(); i++) {
+			resultados.add((int)(Math.random() * getCaras() + 1));
+		}
+		return resultados;
+	}
+
+	private String rollResultadoDesglosado() {
+		String resultado = "";
+		int valorAcumulado = 0;
+		ArrayList<Integer> resultados = desglose();
+		for (int i = 0; i < resultados.size(); i++) {
+			if (i != resultados.size() - 1) {
+				resultado += String.valueOf(resultados.get(i) + " + ");
+			} else {
+				resultado += String.valueOf(resultados.get(i));
+			}
+			valorAcumulado += resultados.get(i);
+			setTotal(valorAcumulado);
+		}
+		return "(" + resultado + ")" + " = " + String.valueOf(valorAcumulado);
+	}
+
+	@Override
+	public String toString() {
+		return String.valueOf(getCantidad())+ "d" + getCaras();
+	}
+
 }

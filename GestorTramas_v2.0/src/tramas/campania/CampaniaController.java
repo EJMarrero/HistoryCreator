@@ -1,5 +1,18 @@
 package tramas.campania;
 
+/**
+ * Implementacion del controlador CampaniaController.
+ * Éste tendrá las siguientes especificaciones:
+ * 
+ * 	*ListView de Notas
+ * 	*ListView de Aventuras
+ * 	*ListView de Personajes
+ * 	*Contenedor para el Mapa de la Campaña, que contendrá una imagen.
+ * 	*Botón que ejecutará la calculadora d20.
+ * 
+ * @author Eduardo Marrero
+ */
+
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -32,6 +45,8 @@ import javafx.scene.media.MediaPlayer;
 import javafx.stage.FileChooser;
 import tramas.App.GestorApp;
 import tramas.App.MainController;
+import tramas.calculadora.controller.CalculadoraController;
+import tramas.calculadora.logica.Calculadora;
 import tramas.mapacampania.MapaCampaniaController;
 import tramas.model.Aventura;
 import tramas.model.Campania;
@@ -54,13 +69,10 @@ public class CampaniaController implements Initializable {
 	private ImageView mapaImage;
 	@FXML
 	private ListView<Nota> notasCampaniaList;
-
 	@FXML
 	private ListView<Aventura> aventurasCampaniaList;
-
 	@FXML
 	private ListView<Personaje> personajesCampaniaList;
-
 	@FXML
 	private Button abrirNotasCampaniaButton, compendioButton, aniadirNotasCampaniaButton, borrarNotasCampaniaButton,
 			guardarAventurasButton, aniadirAventurasButton, verAventurasButton, borrarAventurasButton,
@@ -72,7 +84,6 @@ public class CampaniaController implements Initializable {
 	private NotasCampañaController notasCampañaController = new NotasCampañaController();
 
 	// Modelo
-	// private Campania campaniaModel = new Campania();
 	private ObjectProperty<Campania> campania = new SimpleObjectProperty<>(this, "campania");
 
 	private ObjectProperty<Nota> notaSeleccionada = new SimpleObjectProperty<>(this, "notaSeleccionada");
@@ -132,6 +143,18 @@ public class CampaniaController implements Initializable {
 
 	}
 
+	/**
+	 * Siempre que se carge una campaña nueva, este método desbindeará los elementos:
+	 * 		*La lista de notas de Campaña
+	 * 		*La lista de Aventuras
+	 * 		*La lista de Personajes
+	 * 		*El mapa de la campaña
+	 * de la campaña vieja y los bindeará a la campaña nueva.
+	 * @param o
+	 * @param ov
+	 * @param nv
+	 */
+	
 	private void onCampaniaChanged(ObservableValue<? extends Campania> o, Campania ov, Campania nv) {
 		if (ov != null) {
 			notasCampaniaList.itemsProperty().unbindBidirectional(ov.notasProperty());
@@ -148,16 +171,25 @@ public class CampaniaController implements Initializable {
 		}
 	}
 
-	@FXML
-	void onAbrirMenuItemAction(ActionEvent event) {
-
-	}
+	/**
+	 * Este método añade una nueva aventura y llama al método IrAAventura() que 
+	 * carga la vista de AventuraController desde su controlador padre (MainController)
+	 * @param event
+	 * @throws IOException
+	 */
 
 	@FXML
 	void onAniadirAventurasButtonAction(ActionEvent event) throws IOException {
 		mainController.irAAventura(new Aventura());
 	}
 
+	
+	/**
+	 * Este método añade una imagen a la zona de mapas de la campaña a través de la carga de un fichero con 
+	 * extensión .jgp o .png desde el un directorio local.
+	 * @param event
+	 * @throws IOException
+	 */
 	@FXML
 	void onAniadirMapaButtonAction(ActionEvent event) throws IOException {
 		FileChooser fChooser = new FileChooser();
@@ -188,6 +220,12 @@ public class CampaniaController implements Initializable {
 
 	}
 
+	/**
+	 * Este método añade una nueva campaña 
+	 * @param event
+	 * @throws IOException
+	 */
+	
 	@FXML
 	void onAniadirNotasCampaniaButtonAction(ActionEvent event) throws IOException {
 		NotasCampañaController controllerNotasCampania = new NotasCampañaController();
@@ -208,6 +246,12 @@ public class CampaniaController implements Initializable {
 		notasCampaniaList.refresh();
 	}
 
+    @FXML
+    void onRollButtonAction(ActionEvent event) throws IOException {
+    	CalculadoraController controller = new CalculadoraController();
+    	controller.show(GestorApp.getPrimaryStage());
+    }
+	
 	@FXML
 	void onAniadirPersonajesButtonAction(ActionEvent event) {
 
@@ -312,6 +356,8 @@ public class CampaniaController implements Initializable {
 	void onVerPersonajesButtonAction(ActionEvent event) {
 
 	}
+	
+
 
 	public final ObjectProperty<Campania> campaniaProperty() {
 		return this.campania;

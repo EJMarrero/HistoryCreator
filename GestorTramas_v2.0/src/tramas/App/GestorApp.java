@@ -43,7 +43,7 @@ public class GestorApp extends Application {
 		primaryStage.setScene(scene);
 		primaryStage.setFullScreen(true);
 		primaryStage.show();
-
+		
 	}
 	
 	public static Image getCursor() {
