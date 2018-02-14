@@ -51,6 +51,8 @@ requisitos:
 
 
 
+[ D20-HistoryCreator] descarga del pdf.
+
 [D20-HistoryCreator]: https://github.com/EJMarrero/HistoryCreator/blob/master/docs/D20-HistoryCreator.pdf
 
 ## Aspectos técnicos.
