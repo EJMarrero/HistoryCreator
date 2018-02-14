@@ -67,22 +67,31 @@ requisitos:
 
 Bajo la premisa de que los componenes de la aplicación deben estar visibles y al alcance del usuario de un solo vistazo, se concibe el esquema del programa de la siguiente manera:
 
+[Maquetado de Views] Desde aquí podrá verse un diseño a grosso modo de la disposición de los elementos de la interfaz
+
+[Descarga del diagrama UML en formato .dia] Desde aquí podrás descargar el UML.
+
 [Maquetado de Views]: https://github.com/EJMarrero/HistoryCreator/tree/master/docs/Diagramas/Maquetado%20de%20Views
 [ Descarga del diagrama UML en formato .dia]: https://github.com/EJMarrero/HistoryCreator/blob/master/docs/Diagramas/UMLv1.dia
 
 #### Imágenes del UML:
 
-- [Vista general]: https://github.com/EJMarrero/HistoryCreator/blob/master/docs/Diagramas/VistaGeneral.PNG
+- [Vista general]
+- [Vista inferior derecha]
+- [Vista inferior izquierda]
+- [Vista superior]
 
-- [Vista inferior derecha ]: https://github.com/EJMarrero/HistoryCreator/blob/master/docs/Diagramas/VistaInferiorDer.PNG
-
-- [Vista inferior izquierda]: https://github.com/EJMarrero/HistoryCreator/blob/master/docs/Diagramas/VistaInferiorIzq.PNG
-
-- [ Vista superior ]: https://github.com/EJMarrero/HistoryCreator/blob/master/docs/Diagramas/VistaSuperior.PNG
+[Vista general]: https://github.com/EJMarrero/HistoryCreator/blob/master/docs/Diagramas/VistaGeneral.PNG
+[Vista inferior derecha ]: https://github.com/EJMarrero/HistoryCreator/blob/master/docs/Diagramas/VistaInferiorDer.PNG
+[Vista inferior izquierda]: https://github.com/EJMarrero/HistoryCreator/blob/master/docs/Diagramas/VistaInferiorIzq.PNG
+[ Vista superior ]: https://github.com/EJMarrero/HistoryCreator/blob/master/docs/Diagramas/VistaSuperior.PNG
 
 
 
 ## Desarrolladores:
+
+- Link al GitHub de [EJ Marrero]
+- Link al GitHub de [cnRoldan]
 
 [EJ Marrero]: https://github.com/EJMarrero
 [ cnRoldan ]: https://github.com/cnRoldan
