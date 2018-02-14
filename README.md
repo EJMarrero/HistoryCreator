@@ -86,7 +86,11 @@ Bajo la premisa de que los componenes de la aplicación deben estar visibles y a
 [Vista inferior izquierda]: https://github.com/EJMarrero/HistoryCreator/blob/master/docs/Diagramas/VistaInferiorIzq.PNG
 [ Vista superior ]: https://github.com/EJMarrero/HistoryCreator/blob/master/docs/Diagramas/VistaSuperior.PNG
 
+### Pruebas:
 
+[Pruebas - 1ª Iteración]
+
+[Pruebas - 1ª Iteración]: https://github.com/EJMarrero/HistoryCreator/blob/master/docs/Pruebas_i_1.pdf
 
 ## Desarrolladores:
 
