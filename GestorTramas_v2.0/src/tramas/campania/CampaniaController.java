@@ -47,7 +47,7 @@ import tramas.App.GestorApp;
 import tramas.App.MainController;
 import tramas.calculadora.controller.CalculadoraController;
 import tramas.calculadora.logica.Calculadora;
-import tramas.mapacampania.MapaCampaniaController;
+import tramas.campania.mapa.MapaCampaniaController;
 import tramas.model.Aventura;
 import tramas.model.Campania;
 //import tramas.model.Mapa;
@@ -311,7 +311,6 @@ public class CampaniaController implements Initializable {
 	void onExpandirMapaButtonAction(ActionEvent event) {
 		// mapaController.setImagen(mapaImage.getImage());
 		mapaController.getContenedorMapa().setImage(mapaImage.getImage());
-		System.out.println(mapaImage.getImage().toString());
 		// System.out.println(mapaController.getImagen().toString());
 		mapaController.show(GestorApp.getPrimaryStage());
 
