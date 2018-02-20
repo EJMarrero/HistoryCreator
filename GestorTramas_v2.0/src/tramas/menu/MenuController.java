@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import javafx.application.Platform;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.event.ActionEvent;
@@ -79,7 +80,7 @@ public class MenuController implements Initializable {
 			// comprueba si se seleccionó un fichero en el diálogo (File) o se canceló
 			// (null)
 			if (fichero != null) {
-				// se guarda el historial en el fichero indicado
+				// se guarda la campaña en el fichero indicado
 				campania.get().save(fichero);
 			}
 		} catch (Exception e1) {
@@ -87,8 +88,8 @@ public class MenuController implements Initializable {
 			// muestra un diálogo con el error
 			Alert error = new Alert(AlertType.ERROR);
 			error.initOwner(GestorApp.getPrimaryStage());
-			error.setTitle("Guardar historial");
-			error.setHeaderText("Error al guardar un historial.");
+			error.setTitle("Guardar aventura");
+			error.setHeaderText("Error al guardar la aventura.");
 			error.setContentText(e1.getMessage());
 			error.showAndWait();
 		}
@@ -101,9 +102,13 @@ public class MenuController implements Initializable {
 
 	@FXML
 	void onSalirMenuItemAction(ActionEvent event) {
-
+		Platform.exit();
 	}
 
+	@FXML
+	void onImprimirMenuAction(ActionEvent event) {
+		
+	}
 	public void setMainController(MainController mainController) {
 		this.mainController = mainController;
 	}

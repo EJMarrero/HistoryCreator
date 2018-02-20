@@ -15,14 +15,13 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-
 <BorderPane fx:id="view" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <top>
         <VBox fx:id="cajaSuperior" BorderPane.alignment="CENTER">
             <MenuBar>
-                <Menu text="File">
-                    <MenuItem onAction="#onSave" text="Save" />
-                    <MenuItem onAction="#onExit" text="Exit" />
+                <Menu text="Opciones">
+                    <MenuItem onAction="#onSave" text="Guardar captura..." />
+                    <MenuItem onAction="#onExit" text="Volver a Campaña" />
                 </Menu>
             </MenuBar>
    
@@ -32,7 +31,9 @@
                     <ColorPicker fx:id="colorPicker" />
                     <CheckBox fx:id="eraser" text="Eraser" />
                 </HBox>
+            <Button mnemonicParsing="false" onAction="#onLimpiarButtonAction" text="Limpiar Pizarra" />
             <Button mnemonicParsing="false" onAction="#onCargarImagenButtonAction" text="Cargar imagen..." />
+            <Button mnemonicParsing="false" onAction="#onBackButtonAction" text="Volver a Campaña" />
             </ToolBar>
         </VBox>
    </top>

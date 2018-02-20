@@ -41,7 +41,7 @@ public class GestorApp extends Application {
 		primaryStage.setTitle("GestorTramas_v.2.0");		
 		primaryStage.setFullScreenExitHint("");
 		primaryStage.setScene(scene);
-		primaryStage.setFullScreen(true);
+		primaryStage.setMaximized(true);
 		primaryStage.show();
 		
 	}

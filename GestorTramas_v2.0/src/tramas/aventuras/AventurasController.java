@@ -34,6 +34,8 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import tramas.App.GestorApp;
 import tramas.App.MainController;
+import tramas.aventuras.tablero.TableroController;
+import tramas.calculadora.controller.CalculadoraController;
 import tramas.campania.CampaniaController;
 import tramas.menu.MenuController;
 import tramas.model.Aventura;
@@ -52,6 +54,7 @@ public class AventurasController implements Initializable {
 	
 	//Subcontroladores
 	private CargarTableroController tableroController = new CargarTableroController();
+	private TableroController pizarraController = new TableroController();
 	
 	//Modelo
 	private ObjectProperty<Aventura> aventura = new SimpleObjectProperty<>(this, "aventura");
@@ -112,6 +115,9 @@ public class AventurasController implements Initializable {
 		
 		tableroController.setMainController(this);
 		
+		pizarraController.setMainController(this);
+		pizarraController.aventuraProperty().bindBidirectional(aventura);
+		
 		npcSeleccionado.bind(npcsListView.getSelectionModel().selectedItemProperty());
 		encuentroSeleccionado.bind(encuentrosListView.getSelectionModel().selectedItemProperty());
 		notaSeleccionada.bind(notasAventuraListView.getSelectionModel().selectedItemProperty());
@@ -130,6 +136,14 @@ public class AventurasController implements Initializable {
 			
 		});
 		
+		//Botones desactivados en esta version
+		compendioButton.setDisable(true);
+		abrirTesoroButton.setDisable(true);
+		verTesoroButton.setDisable(true);
+		borrarTesoroButton.setDisable(true);
+		verEncuentroButton.setDisable(true);
+		verNPCButton.setDisable(true);
+		
 		aventura.addListener((o, ov, nv) -> onAventuraChanged(o, ov, nv));
 		aventura.set(new Aventura());
 	}
@@ -141,12 +155,7 @@ public class AventurasController implements Initializable {
 
     private void onAventuraChanged(ObservableValue<? extends Aventura> o, Aventura ov, Aventura nv) {
 		if(ov != null) {
-//			aventura.get().nombreProperty().unbind();
-//			aventura.get().encuentrosProperty().unbind();
-//			aventura.get().pnjsProperty().unbind();
-//			aventura.get().notasProperty().unbind();
-//			aventura.get().portraitProperty().unbind();
-//			aventura.get().tablerosProperty().unbind();
+
 			tituloAventuraText.textProperty().unbindBidirectional(ov.nombreProperty());
 			npcsListView.itemsProperty().unbindBidirectional(ov.pnjsProperty());
 			encuentrosListView.itemsProperty().unbindBidirectional(ov.encuentrosProperty());
@@ -162,13 +171,7 @@ public class AventurasController implements Initializable {
 			notasAventuraListView.itemsProperty().bindBidirectional(nv.notasProperty());
 			portraitImage.imageProperty().bindBidirectional(nv.portraitProperty());
 			tableroListView.itemsProperty().bindBidirectional(nv.tablerosProperty());
-			
-//			tituloAventuraText.textProperty().bindBidirectional(aventura.get().nombreProperty());
-//			npcsListView.itemsProperty().bindBidirectional(aventura.get().pnjsProperty());
-//			encuentrosListView.itemsProperty().bindBidirectional(aventura.get().encuentrosProperty());
-//			notasAventuraListView.itemsProperty().bindBidirectional(aventura.get().notasProperty());
-//			portraitImage.imageProperty().bindBidirectional(aventura.get().portraitProperty());
-//			tableroListView.itemsProperty().bindBidirectional(aventura.get().tablerosProperty());
+
 			
 		}
 	}
@@ -225,7 +228,13 @@ public class AventurasController implements Initializable {
     	
     }
 
-
+    public void irATablero() {
+    
+    	
+		pizarraController.getContenedorMapa().setImage(tableroImagen.getImage());
+		pizarraController.show(GestorApp.getPrimaryStage());
+		
+    }
 
     @FXML
     void onBorrarEncuentroButtonAction(ActionEvent event) {
@@ -272,6 +281,7 @@ public class AventurasController implements Initializable {
 			tableroImagen.setImage(null);
 		}
     }
+    
 
     @FXML
     void onBorrarTesoroButtonAction(ActionEvent event) {
@@ -287,8 +297,11 @@ public class AventurasController implements Initializable {
 				"*.jpg", "*.png");
 		fChooser.getExtensionFilters().add(extFilterJPG);
 		File imageFile = fChooser.showOpenDialog(stage);
-		Image image = new Image(imageFile.toURI().toString());
-		aventura.get().setPortrait(image);
+		
+		if(imageFile != null) {
+			Image image = new Image(imageFile.toURI().toString());
+			aventura.get().setPortrait(image);
+		}
     }
 
     @FXML
@@ -298,14 +311,15 @@ public class AventurasController implements Initializable {
 
     @FXML
     void onExpandirImagenTableroButtonAction(ActionEvent event) {
-
+    	irATablero();
     }
     
 
 
     @FXML
-    void onRollButtonAction(ActionEvent event) {
-
+    void onRollButtonAction(ActionEvent event) throws IOException {
+    	CalculadoraController controller = new CalculadoraController();
+    	controller.show(GestorApp.getPrimaryStage());
     }
 
     @FXML

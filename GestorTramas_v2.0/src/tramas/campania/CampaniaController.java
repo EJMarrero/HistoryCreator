@@ -90,6 +90,7 @@ public class CampaniaController implements Initializable {
 	private ListProperty<Nota> listaNotas = new SimpleListProperty<>(this, "listaNotas");
 	private ObjectProperty<Aventura> aventuraSeleccionada = new SimpleObjectProperty<>(this, "aventuraSeleccionada");
 	private ObjectProperty<Personaje> personajeSeleccionado = new SimpleObjectProperty<>(this, "personajeSeleccionado");
+	private ObjectProperty<Image> mapaImageModel = new SimpleObjectProperty<>(this, "mapaImageModel");
 
 	public CampaniaController() throws IOException {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("CampaniaView.fxml"));
@@ -100,45 +101,55 @@ public class CampaniaController implements Initializable {
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 
-		mapaController.setMainController(this);
+//		mapaController.setMainController(this);
 		notasCampañaController.setMainController(this);
+		
 
 		notaSeleccionada.bind(notasCampaniaList.getSelectionModel().selectedItemProperty());
 		aventuraSeleccionada.bind(aventurasCampaniaList.getSelectionModel().selectedItemProperty());
 		personajeSeleccionado.bind(personajesCampaniaList.getSelectionModel().selectedItemProperty());
+		mapaImageModel.bind(mapaImage.imageProperty());
 
 		abrirNotasCampaniaButton.disableProperty().bind(notaSeleccionada.isNull());
 		borrarNotasCampaniaButton.disableProperty().bind(notaSeleccionada.isNull());
 
-		guardarAventurasButton.disableProperty().bind(aventuraSeleccionada.isNull());
+		
 		verAventurasButton.disableProperty().bind(aventuraSeleccionada.isNull());
 		borrarAventurasButton.disableProperty().bind(aventuraSeleccionada.isNull());
 
 		importarPersonajesButton.disableProperty().bind(personajeSeleccionado.isNull());
 		verPersonajesButton.disableProperty().bind(personajeSeleccionado.isNull());
 		borrarPersonajesButton.disableProperty().bind(personajeSeleccionado.isNull());
+		
+		
+		borrarMapaButton.disableProperty().bind(mapaImageModel.isNull());
 
-		// BooleanBinding desactivarMapa =
-		// campania.get().mapaCampaniaProperty().isNull();
-		// guardarMapaButton.disableProperty().bind(desactivarMapa);
-		// expandirMapaButton.disableProperty().bind(desactivarMapa);
-		// borrarMapaButton.disableProperty().bind(desactivarMapa);
+//		 BooleanBinding desactivarMapa =
+//		 campania.get().mapaCampaniaProperty().isNull();
+//		 guardarMapaButton.disableProperty().bind(desactivarMapa);
+//		 expandirMapaButton.disableProperty().bind(desactivarMapa);
+//		 borrarMapaButton.disableProperty().bind(desactivarMapa);
 
-		EventHandler<Event> efectoButton = new EventHandler<Event>() {
-			@Override
-			public void handle(Event event) {
-				Media sound = new Media(new File("botoneffecto.mp3").toURI().toString());
-				MediaPlayer mediaPlayer = new MediaPlayer(sound);
-				mediaPlayer.setVolume(0.2);
-				mediaPlayer.play();
-			}
-		};
+//		EventHandler<Event> efectoButton = new EventHandler<Event>() {
+//			@Override
+//			public void handle(Event event) {
+//				Media sound = new Media(new File("botoneffecto.mp3").toURI().toString());
+//				MediaPlayer mediaPlayer = new MediaPlayer(sound);
+//				mediaPlayer.setVolume(0.2);
+//				mediaPlayer.play();
+//			}
+//		};
+//
+//		aniadirNotasCampaniaButton.setOnMouseClicked(efectoButton);
+//		aniadirAventurasButton.setOnMouseClicked(efectoButton);
+//		aniadirPersonajesButton.setOnMouseClicked(efectoButton);
+//		aniadirMapaButton.setOnMouseClicked(efectoButton);
 
-		aniadirNotasCampaniaButton.setOnMouseClicked(efectoButton);
-		aniadirAventurasButton.setOnMouseClicked(efectoButton);
-		aniadirPersonajesButton.setOnMouseClicked(efectoButton);
-		aniadirMapaButton.setOnMouseClicked(efectoButton);
-
+		//Botones deshabilitados en esta versión:
+		compendioButton.setDisable(true);
+		tesorosButton.setDisable(true);
+		aniadirPersonajesButton.setDisable(true);
+		
 		campania.addListener((o, ov, nv) -> onCampaniaChanged(o, ov, nv));
 
 	}
@@ -166,7 +177,6 @@ public class CampaniaController implements Initializable {
 			notasCampaniaList.itemsProperty().bindBidirectional(nv.notasProperty());
 			aventurasCampaniaList.itemsProperty().bindBidirectional(nv.aventurasProperty());
 			personajesCampaniaList.itemsProperty().bindBidirectional(nv.personajesProperty());
-			// campania.get().mapaCampaniaProperty().bind(nv.mapaCampaniaProperty());
 			mapaImage.imageProperty().bindBidirectional(nv.mapaCampaniaProperty());
 		}
 	}
@@ -198,26 +208,12 @@ public class CampaniaController implements Initializable {
 				"*.jpg", "*.png");
 		fChooser.getExtensionFilters().add(extFilterJPG);
 		File imageFile = fChooser.showOpenDialog(GestorApp.getPrimaryStage());
+		
+		if(imageFile != null) {
 		Image image = new Image(imageFile.toURI().toString());
 
-		// ByteArrayOutputStream bos = new ByteArrayOutputStream();
-		// BufferedImage bf = ImageIO.read(imageFile);
-		// ImageIO.write(bf, "jpg", bos);
-		// byte[] imageBytes = bos.toByteArray();
-		// Base64Encoder encoder = new Base64Serializer(null, null);
-
-		// Reconstruye la imagen
-		// BufferedImage bf = ImageIO.read(imageFile);
-		// WritableImage wr = new WritableImage(bf.getWidth(), bf.getHeight());
-		// PixelWriter pw = wr.getPixelWriter();
-		// for (int i = 0; i < bf.getWidth(); i++) {
-		// for (int j = 0; j < bf.getHeight(); j++) {
-		// pw.setArgb(i, j, bf.getRGB(i,j));
-		// }
-		//
-		// }
 		campania.get().setMapaCampania(image);
-
+		}
 	}
 
 	/**
@@ -236,6 +232,12 @@ public class CampaniaController implements Initializable {
 		}
 	}
 
+	/**
+	 * Abre una ventana nueva en la que se cargan los datos Título y Texto de 
+	 * la nota de campaña seleccionada
+	 * @param event
+	 * @throws IOException
+	 */
 	@FXML
 	void onAbrirNotasCampaniaButtonAction(ActionEvent event) throws IOException {
 		NotasCampañaController controllerNotasCampania = new NotasCampañaController();
@@ -246,6 +248,11 @@ public class CampaniaController implements Initializable {
 		notasCampaniaList.refresh();
 	}
 
+	/**
+	 * Abre la calculadora de dados
+	 * @param event
+	 * @throws IOException
+	 */
     @FXML
     void onRollButtonAction(ActionEvent event) throws IOException {
     	CalculadoraController controller = new CalculadoraController();
@@ -257,6 +264,11 @@ public class CampaniaController implements Initializable {
 
 	}
 
+	/**
+	 * Borra la aventura seleccionada del ListView apareciendo en primera instancia
+	 * un alert dialog
+	 * @param event
+	 */
 	@FXML
 	void onBorrarAventurasButtonAction(ActionEvent event) {
 		String nombre = aventuraSeleccionada.get().getNombre();
@@ -272,11 +284,20 @@ public class CampaniaController implements Initializable {
 		}
 	}
 
+	/**
+	 * Borra el mapa de campaña
+	 * @param event
+	 */
 	@FXML
 	void onBorrarMapaButtonAction(ActionEvent event) {
 		campania.get().setMapaCampania(null);
 	}
 
+	/**
+	 * Borra una nota de campaña seleccionada, previo dialog alert para confirmar
+	 * tal acción
+	 * @param event
+	 */
 	@FXML
 	void onBorrarNotasCampaniaButtonAction(ActionEvent event) {
 		String nombre = notaSeleccionada.get().getTitulo();
@@ -307,6 +328,10 @@ public class CampaniaController implements Initializable {
 
 	}
 
+	/**
+	 * Cambia la perspectiva del mapa de Campaña al stage de edición.
+	 * @param event
+	 */
 	@FXML
 	void onExpandirMapaButtonAction(ActionEvent event) {
 		// mapaController.setImagen(mapaImage.getImage());
@@ -346,6 +371,10 @@ public class CampaniaController implements Initializable {
 
 	}
 
+	/**
+	 * Copia la aventura seleccionada y la carga en la vista de aventura.
+	 * @param event
+	 */
 	@FXML
 	void onVerAventurasButtonAction(ActionEvent event) {
 		mainController.irAAventura(aventuraSeleccionada.get().clonar());

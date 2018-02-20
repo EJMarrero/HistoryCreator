@@ -89,7 +89,15 @@ public class CalculadoraController implements Initializable {
 		        }
 		    }
 		});
-
+		
+		//Botones deshabilitados en esta versión
+		sumarButton.setDisable(true);
+		multiplicarButton.setDisable(true);
+		restarButton.setDisable(true);
+		dividirButton.setDisable(true);
+		borrarButton.setDisable(true);
+		parentesisDerButton.setDisable(true);
+		parentesisIzqButton.setDisable(true);
 	}
 
 	@FXML

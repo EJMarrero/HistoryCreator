@@ -6,8 +6,11 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+import javax.imageio.ImageIO;
+
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -17,9 +20,11 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.Alert;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -33,6 +38,8 @@ import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javafx.stage.FileChooser.ExtensionFilter;
+import tramas.App.GestorApp;
 import tramas.campania.CampaniaController;
 import tramas.editorImagen.EditorImagen;
 import tramas.menu.MenuController;
@@ -44,10 +51,11 @@ import tramas.notasCampaña.DragResizeMod;
 public class MapaCampaniaController implements Initializable {
 
 	// Referencia al controlador padre
-	private CampaniaController mainController;
-	private MenuController menuController = new MenuController();
+//	private CampaniaController mainController;
+//	private MenuController menuController = new MenuController();
 
 	//Vista
+	private Stage stage;
 	private Rectangle avatar= new Rectangle();
 	@FXML
 	private BorderPane view;
@@ -82,11 +90,12 @@ public class MapaCampaniaController implements Initializable {
 
 	// Model
 	Group group = new Group();
-	public PannableCanvas panelZoom = new PannableCanvas();
-	public NodeGestures nodeGestures = new NodeGestures(panelZoom);
+	public PannableCanvas panelZoom;
+	public NodeGestures nodeGestures;
 //	public SceneGestures scenegestures = new SceneGestures(canvas);
 	public ArrayList<ImagePattern> listaAvatares = new ArrayList<>();
 	public ObjectProperty<Rectangle> nuevoAvatar = new SimpleObjectProperty<>(this, "nuevoAvatar");
+	public GraphicsContext g;
 
 	public MapaCampaniaController() throws IOException {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("MapaCampaniaView.fxml"));
@@ -97,11 +106,14 @@ public class MapaCampaniaController implements Initializable {
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		scene = new Scene(view);
-	
+		panelZoom = new PannableCanvas();
+		nodeGestures = new NodeGestures(panelZoom);
+
 
 		contenedorMapa.toBack();
 		panelZoom.toBack();
-        GraphicsContext g = canvas.getGraphicsContext2D();
+		
+		g = canvas.getGraphicsContext2D();
 
         canvas.setOnMouseDragged(e -> {
             double size = Double.parseDouble(brushSize.getText());
@@ -136,10 +148,10 @@ public class MapaCampaniaController implements Initializable {
 		
 	
 
-	public void setMainController(CampaniaController mainController) {
-		this.mainController = mainController;
-
-	}
+//	public void setMainController(CampaniaController mainController) {
+//		this.mainController = mainController;
+//
+//	}
 
 	public BorderPane getView() {
 		return view;
@@ -147,23 +159,62 @@ public class MapaCampaniaController implements Initializable {
 
 	public void show(Stage parentStage) {
 		// scene.getStylesheets().add(getClass().getResource("styleAventura.css").toExternalForm());
-		parentStage.setScene(scene);
-		parentStage.setFullScreen(true);
-		parentStage.setFullScreenExitHint("");
-		parentStage.setResizable(false);
-		parentStage.show();
+//		parentStage.setScene(scene);
+//		parentStage.setMaximized(true);
+//		parentStage.setFullScreenExitHint("");
+//		parentStage.setResizable(false);
+//		parentStage.showAndWait();
+		
+		stage = new Stage();
+		stage.setScene(scene);
+		stage.initOwner(parentStage);
+		stage.setMaximized(true);
+		stage.setResizable(false);
+		stage.showAndWait();
 
 	}
 	
 	@FXML
 	void onSave(ActionEvent event) {
-		
+		 try {
+	            Image snapshot = contenedorPizarra.snapshot(null, null);
+	            
+	            FileChooser guardarDialog = new FileChooser();
+				guardarDialog.setInitialDirectory(new File("."));
+				guardarDialog.getExtensionFilters().add(new ExtensionFilter("Imagen PNG (*.png)", "*.png"));
+				File fichero = guardarDialog.showSaveDialog(GestorApp.getPrimaryStage());
+				
+	            if (fichero != null)
+	            ImageIO.write(SwingFXUtils.fromFXImage(snapshot, null), "png", fichero);
+	        } catch (Exception e) {
+	        	e.printStackTrace();
+				// muestra un diálogo con el error
+				Alert error = new Alert(AlertType.ERROR);
+				error.initOwner(GestorApp.getPrimaryStage());
+				error.setTitle("Guardar captura");
+				error.setHeaderText("Error al guardar la captura.");
+				error.setContentText(e.getMessage());
+				error.showAndWait();
+	        }
 	}
 	
 	@FXML
 	void onExit(ActionEvent event) {
-		
+		g.clearRect(0, 0, scene.getWidth(), scene.getHeight());
+		stage.close();
 	}
+	
+
+    @FXML
+    void onLimpiarButtonAction(ActionEvent event) {
+    	g.clearRect(0, 0, scene.getWidth(), scene.getHeight());
+    }
+    
+    @FXML
+    void onBackButtonAction(ActionEvent event) {
+    	g.clearRect(0, 0, scene.getWidth(), scene.getHeight());
+		stage.close();
+    }
 
     @FXML
     void onCargarImagenButtonAction(ActionEvent event) {
@@ -177,17 +228,19 @@ public class MapaCampaniaController implements Initializable {
 		fChooser.getExtensionFilters().add(extFilterJPG);
 		File imageFile = fChooser.showOpenDialog(stage);
 		
+		if(imageFile != null) {
 		
 		Rectangle nuevo = new Rectangle();
 		nuevo = EditorImagen.redimensionarArchivo(imageFile);
-//		nuevo.toBack();
+
 		listaAvatares.add((ImagePattern) nuevo.getFill());
-		System.out.println(nuevo.getFill().toString());
+		
 		
 
 		
 		
 		agregarAvatares();
+		}
     }
     
     private void agregarAvatares() {
@@ -195,32 +248,13 @@ public class MapaCampaniaController implements Initializable {
     	for (int i = 0; i < listaAvatares.size(); i++) {
     		
     		rectangle.setFill(listaAvatares.get(i));
-//    		rectangle.toBack();
+
 		}
     	avatar = rectangle;
     	panelZoom.getChildren().add(rectangle);
     	System.out.println(rectangle.toString());
 
-        
-// 		avatar.setOnMouseEntered(new EventHandler<MouseEvent>() {
-//
-// 			@Override
-// 			public void handle(MouseEvent event) {
-// 				avatar.setStroke(Color.BLACK);
-//
-// 			}
-//
-// 		});
-// 		
-// 		avatar.setOnMouseExited(new EventHandler<MouseEvent>() {
-//
-// 			@Override
-// 			public void handle(MouseEvent event) {
-// 				avatar.setStroke(Color.TRANSPARENT);
-//
-// 			}
-//
-// 		});
+
  		
  		avatar.setOnMouseClicked(new EventHandler<MouseEvent> () {
  			
