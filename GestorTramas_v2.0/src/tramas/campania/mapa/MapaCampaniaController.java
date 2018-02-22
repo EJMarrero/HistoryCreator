@@ -200,19 +200,19 @@ public class MapaCampaniaController implements Initializable {
 	
 	@FXML
 	void onExit(ActionEvent event) {
-		g.clearRect(0, 0, scene.getWidth(), scene.getHeight());
+		g.clearRect(0, 0, contenedorPizarra.getWidth(), contenedorPizarra.getHeight());
 		stage.close();
 	}
 	
 
     @FXML
     void onLimpiarButtonAction(ActionEvent event) {
-    	g.clearRect(0, 0, scene.getWidth(), scene.getHeight());
+    	g.clearRect(0, 0, contenedorPizarra.getWidth(), contenedorPizarra.getHeight());
     }
     
     @FXML
     void onBackButtonAction(ActionEvent event) {
-    	g.clearRect(0, 0, scene.getWidth(), scene.getHeight());
+    	g.clearRect(0, 0, contenedorPizarra.getWidth(), contenedorPizarra.getHeight());
 		stage.close();
     }
 

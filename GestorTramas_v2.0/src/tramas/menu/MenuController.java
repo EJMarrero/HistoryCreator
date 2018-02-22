@@ -14,6 +14,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.MenuBar;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
@@ -97,7 +98,15 @@ public class MenuController implements Initializable {
 
 	@FXML
 	void onNuevoMenuItemAction(ActionEvent event) {
-
+		Alert confirmacion = new Alert(AlertType.WARNING);
+		confirmacion.initOwner(GestorApp.getPrimaryStage());
+		confirmacion.setTitle("Nuevo Campaña");
+		confirmacion.setHeaderText("Se dispone a crear una nueva campaña.\nSi tiene información sin guardar se perderá para siempre.");
+		confirmacion.setContentText("¿Seguro que desea continuar?");
+		confirmacion.getButtonTypes().setAll(ButtonType.YES, ButtonType.NO);
+		if (confirmacion.showAndWait().get().equals(ButtonType.YES)) {
+			campania.set(new Campania());
+		}
 	}
 
 	@FXML

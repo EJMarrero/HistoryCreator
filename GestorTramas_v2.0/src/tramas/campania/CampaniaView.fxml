@@ -24,7 +24,7 @@
                <children>
                   <VBox fx:id="zonaMapa" alignment="CENTER" spacing="2.0" styleClass="zonaDeMapa" VBox.vgrow="NEVER">
                      <children>
-                        <TextField alignment="CENTER" maxWidth="300.0" promptText="Título de la campaña" styleClass="tituloCampania">
+                        <TextField fx:id="tituloCampaniaText" alignment="CENTER" maxWidth="300.0" promptText="Título de la campaña" styleClass="tituloCampania">
                            <VBox.margin>
                               <Insets top="70.0" />
                            </VBox.margin>

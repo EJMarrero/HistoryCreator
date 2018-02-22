@@ -12,6 +12,7 @@ import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -206,17 +207,19 @@ public class TableroController implements Initializable {
 	}
     @FXML
     void onLimpiarButtonAction(ActionEvent event) {
-    	g.clearRect(0, 0, scene.getWidth(), scene.getHeight());
+    	double x =scene.getX();
+    	double y = scene.getY();
+    	g.clearRect(0, 0, contenedorPizarra.getWidth(), contenedorPizarra.getHeight());
     }
     
 	@FXML
 	void onExit(ActionEvent event) {
-		g.clearRect(0, 0, scene.getWidth(), scene.getHeight());
+		g.clearRect(0, 0, contenedorPizarra.getWidth(), contenedorPizarra.getHeight());
 		stage.close();
 	}
     @FXML
     void onBackButtonAction(ActionEvent event) {
-    	g.clearRect(0, 0, scene.getWidth(), scene.getHeight());
+    	g.clearRect(0, 0, contenedorPizarra.getWidth(), contenedorPizarra.getHeight());
 		stage.close();
     }
 

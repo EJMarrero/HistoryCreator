@@ -38,7 +38,7 @@
         </VBox>
    </top>
    <center>
-      <StackPane fx:id="contenedorPizarra" prefHeight="2000.0" prefWidth="2000.0" BorderPane.alignment="CENTER">
+      <StackPane fx:id="contenedorPizarra" BorderPane.alignment="CENTER">
          <children>
               <Canvas fx:id="canvas" height="2000.0" width="2000.0" />
             <ImageView fx:id="contenedorMapa" pickOnBounds="true" preserveRatio="true" />

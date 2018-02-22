@@ -35,6 +35,7 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 //import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -62,7 +63,9 @@ public class CampaniaController implements Initializable {
 
 	// Vista
 	@FXML
-	private BorderPane view;
+	private BorderPane view;	
+	@FXML
+	private TextField tituloCampaniaText;
 	@FXML
 	private VBox zonaMapa;
 	@FXML
@@ -84,7 +87,7 @@ public class CampaniaController implements Initializable {
 	private NotasCampañaController notasCampañaController = new NotasCampañaController();
 
 	// Modelo
-	private ObjectProperty<Campania> campania = new SimpleObjectProperty<>(this, "campania");
+	private ObjectProperty<Campania> campania = new SimpleObjectProperty<>(this, "campania", new Campania());
 
 	private ObjectProperty<Nota> notaSeleccionada = new SimpleObjectProperty<>(this, "notaSeleccionada");
 	private ListProperty<Nota> listaNotas = new SimpleListProperty<>(this, "listaNotas");
@@ -104,12 +107,13 @@ public class CampaniaController implements Initializable {
 //		mapaController.setMainController(this);
 		notasCampañaController.setMainController(this);
 		
-
+//		campania.get().nombreProperty().bind(tituloCampaniaText.textProperty());
 		notaSeleccionada.bind(notasCampaniaList.getSelectionModel().selectedItemProperty());
 		aventuraSeleccionada.bind(aventurasCampaniaList.getSelectionModel().selectedItemProperty());
 		personajeSeleccionado.bind(personajesCampaniaList.getSelectionModel().selectedItemProperty());
 		mapaImageModel.bind(mapaImage.imageProperty());
 
+		
 		abrirNotasCampaniaButton.disableProperty().bind(notaSeleccionada.isNull());
 		borrarNotasCampaniaButton.disableProperty().bind(notaSeleccionada.isNull());
 
@@ -168,12 +172,14 @@ public class CampaniaController implements Initializable {
 	
 	private void onCampaniaChanged(ObservableValue<? extends Campania> o, Campania ov, Campania nv) {
 		if (ov != null) {
+			tituloCampaniaText.textProperty().unbindBidirectional(ov.nombreProperty());
 			notasCampaniaList.itemsProperty().unbindBidirectional(ov.notasProperty());
 			aventurasCampaniaList.itemsProperty().unbindBidirectional(ov.aventurasProperty());
 			personajesCampaniaList.itemsProperty().unbindBidirectional(ov.personajesProperty());
 			mapaImage.imageProperty().unbindBidirectional(ov.mapaCampaniaProperty());
 		}
 		if (nv != null) {
+			tituloCampaniaText.textProperty().bindBidirectional(nv.nombreProperty());
 			notasCampaniaList.itemsProperty().bindBidirectional(nv.notasProperty());
 			aventurasCampaniaList.itemsProperty().bindBidirectional(nv.aventurasProperty());
 			personajesCampaniaList.itemsProperty().bindBidirectional(nv.personajesProperty());

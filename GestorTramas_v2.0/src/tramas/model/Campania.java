@@ -61,35 +61,6 @@ public class Campania {
 
 
 
-
-
-	public final StringProperty nombreProperty() {
-		return this.nombre;
-	}
-	
-
-
-
-
-	@XmlAttribute
-	public final String getNombre() {
-		return this.nombreProperty().get();
-	}
-	
-
-
-
-
-
-	public final void setNombre(final String nombre) {
-		this.nombreProperty().set(nombre);
-	}
-	
-
-
-
-
-
 	public final ListProperty<Aventura> aventurasProperty() {
 		return this.aventuras;
 	}
@@ -193,6 +164,33 @@ public class Campania {
 	public final void setMapaCampania(final Image mapaCampania) {
 		this.mapaCampaniaProperty().set(mapaCampania);
 	}
+
+
+
+
+
+	public final StringProperty nombreProperty() {
+		return this.nombre;
+	}
+	
+
+
+
+
+	@XmlAttribute
+	public final String getNombre() {
+		return this.nombreProperty().get();
+	}
+	
+
+
+
+
+
+	public final void setNombre(final String nombre) {
+		this.nombreProperty().set(nombre);
+	}
+	
 	
 	
 	
