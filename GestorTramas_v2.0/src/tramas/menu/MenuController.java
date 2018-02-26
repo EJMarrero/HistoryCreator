@@ -181,8 +181,8 @@ public class MenuController implements Initializable {
 		
 		JasperFillManager.fillReportToFile("reports/Prueba.jasper", params);
 		
-		JasperExportManager.exportReportToPdfFile("reports/Prueba.jrprint", "TuCampaña.pdf");
-		Desktop.getDesktop().open(new File("TuCampaña.pdf"));
+		JasperExportManager.exportReportToPdfFile("reports/Prueba.jrprint", "TuCampaña2.pdf");
+		Desktop.getDesktop().open(new File("TuCampaña2.pdf"));
 	}
 	public void setMainController(MainController mainController) {
 		this.mainController = mainController;

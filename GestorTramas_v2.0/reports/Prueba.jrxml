@@ -26,6 +26,16 @@
 			<fieldDescription><![CDATA[.]]></fieldDescription>
 		</field>
 	</subDataset>
+	<subDataset name="DataSetNotas" uuid="d48ae74f-4286-490b-bf55-8a39fe7ac051">
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="daNotas"/>
+		<queryString language="xPath">
+			<![CDATA[/campania/notas]]>
+		</queryString>
+		<field name="titulo" class="java.lang.String">
+			<property name="net.sf.jasperreports.xpath.field.expression" value="@titulo"/>
+			<fieldDescription><![CDATA[@titulo]]></fieldDescription>
+		</field>
+	</subDataset>
 	<queryString language="XPath">
 		<![CDATA[/campania]]>
 	</queryString>
@@ -35,8 +45,36 @@
 	<field name="titulo" class="java.lang.String">
 		<fieldDescription><![CDATA[@nombre]]></fieldDescription>
 	</field>
+	<field name="Notas de Trasfondo" class="java.lang.String">
+		<fieldDescription><![CDATA[notas/@titulo]]></fieldDescription>
+	</field>
 	<background>
-		<band height="802" splitType="Stretch"/>
+		<band height="802" splitType="Stretch">
+			<frame>
+				<reportElement mode="Opaque" x="-1" y="788" width="555" height="13" forecolor="#D0B48E" backcolor="#0C0C0D" uuid="21b8ec89-3912-4f38-b1d2-846c348d496b"/>
+				<textField evaluationTime="Report">
+					<reportElement style="Column header" x="513" y="0" width="40" height="13" forecolor="#FFFFFF" uuid="2f1f4647-386f-4ee9-b3b1-779c70fd7960"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="The Black Pearl" size="12" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement style="Column header" x="433" y="0" width="80" height="13" forecolor="#FFFFFF" uuid="c50a7647-9d9b-4145-89d7-15adb353fac4"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
+						<font fontName="The Black Pearl" size="12" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+				</textField>
+				<textField pattern="EEEEE dd MMMMM yyyy">
+					<reportElement style="Column header" x="2" y="0" width="197" height="13" forecolor="#FFFFFF" uuid="2a75ce15-0152-4154-9a45-a23c6a9d3107"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="The Black Pearl" size="12" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
 	</background>
 	<title>
 		<band height="105" splitType="Stretch">
@@ -46,7 +84,7 @@
 					<font fontName="The Black Pearl" size="31" isBold="false"/>
 					<paragraph lineSpacing="Single"/>
 				</textElement>
-				<text><![CDATA[Título:]]></text>
+				<text><![CDATA[Titulo:]]></text>
 			</staticText>
 			<frame>
 				<reportElement mode="Opaque" x="-20" y="0" width="597" height="65" forecolor="#006699" backcolor="#101112" uuid="29f958b3-9df5-4ee0-905e-9fd33029926f"/>
@@ -93,47 +131,34 @@
 				<imageExpression><![CDATA["src/tramas/resources/d20.png"]]></imageExpression>
 			</image>
 			<textField>
-				<reportElement x="350" y="50" width="100" height="30" uuid="7de6c280-1882-4d08-b923-fca816c04003">
+				<reportElement x="240" y="40" width="100" height="30" uuid="7de6c280-1882-4d08-b923-fca816c04003">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="b3635cf8-77eb-44aa-a730-209d26ba25ab"/>
 				</reportElement>
 				<textFieldExpression><![CDATA[$F{@nombre}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="330" y="10" width="130" height="27" uuid="d60c57eb-e8cf-4285-bf7c-fc76f658ecb3">
+				<reportElement x="240" y="13" width="130" height="27" uuid="d60c57eb-e8cf-4285-bf7c-fc76f658ecb3">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="b3635cf8-77eb-44aa-a730-209d26ba25ab"/>
 				</reportElement>
-				<textElement textAlignment="Center"/>
+				<textElement textAlignment="Left"/>
 				<text><![CDATA[Nombre de la Aventura:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="240" y="118" width="100" height="30" uuid="79d82ce4-5c70-4c7e-95da-55baa99f89ac">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="193751bd-8443-47a4-9714-1dd02609957d"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{Notas de Trasfondo}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="240" y="91" width="100" height="27" uuid="93456796-cea6-46b3-ac21-0a9509da1a0e">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="193751bd-8443-47a4-9714-1dd02609957d"/>
+				</reportElement>
+				<text><![CDATA[Notas de Trasfondo]]></text>
 			</staticText>
 		</band>
 	</detail>
 	<pageFooter>
-		<band height="362" splitType="Stretch">
-			<frame>
-				<reportElement mode="Opaque" x="2" y="0" width="555" height="13" forecolor="#D0B48E" backcolor="#0C0C0D" uuid="21b8ec89-3912-4f38-b1d2-846c348d496b"/>
-				<textField evaluationTime="Report">
-					<reportElement style="Column header" x="513" y="0" width="40" height="13" forecolor="#FFFFFF" uuid="2f1f4647-386f-4ee9-b3b1-779c70fd7960"/>
-					<textElement verticalAlignment="Middle">
-						<font fontName="The Black Pearl" size="12" isBold="false"/>
-					</textElement>
-					<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
-				</textField>
-				<textField>
-					<reportElement style="Column header" x="433" y="0" width="80" height="13" forecolor="#FFFFFF" uuid="c50a7647-9d9b-4145-89d7-15adb353fac4"/>
-					<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
-						<font fontName="The Black Pearl" size="12" isBold="false"/>
-					</textElement>
-					<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
-				</textField>
-				<textField pattern="EEEEE dd MMMMM yyyy">
-					<reportElement style="Column header" x="2" y="0" width="197" height="13" forecolor="#FFFFFF" uuid="2a75ce15-0152-4154-9a45-a23c6a9d3107"/>
-					<textElement verticalAlignment="Middle">
-						<font fontName="The Black Pearl" size="12" isBold="false"/>
-					</textElement>
-					<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
-				</textField>
-			</frame>
-		</band>
+		<band height="362" splitType="Stretch"/>
 	</pageFooter>
 	<summary>
 		<band splitType="Stretch"/>

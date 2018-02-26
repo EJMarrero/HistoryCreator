@@ -4,6 +4,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ColorPicker?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
@@ -26,10 +27,11 @@
             </MenuBar>
    
                               <ToolBar>
+            <Label text="Tamaño pincel" />
                 <HBox alignment="CENTER" spacing="5">
                     <TextField fx:id="brushSize" text="18" />
                     <ColorPicker fx:id="colorPicker" />
-                    <CheckBox fx:id="eraser" text="Eraser" />
+                    <CheckBox fx:id="eraser" text="Borrador" />
                 </HBox>
             <Button mnemonicParsing="false" onAction="#onLimpiarButtonAction" text="Limpiar Pizarra" />
             <Button mnemonicParsing="false" onAction="#onCargarImagenButtonAction" text="Cargar imagen..." />
@@ -38,9 +40,9 @@
         </VBox>
    </top>
    <center>
-      <StackPane fx:id="contenedorPizarra" prefHeight="2000.0" prefWidth="2000.0" BorderPane.alignment="CENTER">
+      <StackPane fx:id="contenedorPizarra" BorderPane.alignment="CENTER">
          <children>
-              <Canvas fx:id="canvas" height="2000.0" width="2000.0" />
+              <Canvas fx:id="canvas" height="4000.0" width="4000.0" />
             <ImageView fx:id="contenedorMapa" pickOnBounds="true" preserveRatio="true" />
          </children>
       </StackPane>

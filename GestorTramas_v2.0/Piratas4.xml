@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<campania nombre="PruebaReportTitulo">
+    <aventuras nombre="Prueba Report Aventura"/>
+    <aventuras nombre="Segunda"/>
+    <notas titulo="PruebaReport">
+        <texto>&lt;html dir="ltr"&gt;&lt;head&gt;&lt;/head&gt;&lt;body contenteditable="true"&gt;&lt;/body&gt;&lt;/html&gt;</texto>
+    </notas>
+    <notas titulo="segunda">
+        <texto>&lt;html dir="ltr"&gt;&lt;head&gt;&lt;/head&gt;&lt;body contenteditable="true"&gt;&lt;/body&gt;&lt;/html&gt;</texto>
+    </notas>
+</campania>

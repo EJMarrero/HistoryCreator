@@ -55,14 +55,9 @@
             </ImageView>
          </graphic>
     </Menu>
-    <Menu mnemonicParsing="false" text="Edit">
+    <Menu mnemonicParsing="false" text="Exportar">
       <items>
         <MenuItem mnemonicParsing="false" onAction="#onImprimirMenuAction" text="Imprimir" />
-      </items>
-    </Menu>
-    <Menu mnemonicParsing="false" text="Help">
-      <items>
-        <MenuItem mnemonicParsing="false" text="About" />
       </items>
     </Menu>
   </menus>
