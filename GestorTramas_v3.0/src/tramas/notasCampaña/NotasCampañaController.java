@@ -22,23 +22,15 @@ import javafx.scene.web.HTMLEditor;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-<<<<<<< HEAD:GestorTramas_v3.0/src/tramas/notasCampaña/NotasCampañaController.java
 import javafx.stage.StageStyle;
-=======
->>>>>>> 57f6c314fab1f308de7bc604d942dd096783c768:GestorTramas_v2.0/src/tramas/notasCampaña/NotasCampañaController.java
 import tramas.campania.CampaniaController;
 import tramas.editorImagen.EditorImagen;
 import tramas.model.Nota;
 import tramas.model.adapter.ImageUtils;
 
 public class NotasCampa�aController implements Initializable {
-<<<<<<< HEAD:GestorTramas_v3.0/src/tramas/notasCampaña/NotasCampañaController.java
-=======
-	
-	//Referencia al controlador padre
-	private CampaniaController mainController;
-	
->>>>>>> 57f6c314fab1f308de7bc604d942dd096783c768:GestorTramas_v2.0/src/tramas/notasCampaña/NotasCampañaController.java
+
+	// Referencia al controlador padre
 
 	// Referencia al controlador padre
 	@SuppressWarnings("unused")
@@ -127,32 +119,10 @@ public class NotasCampa�aController implements Initializable {
 				"*.jpg", "*.png");
 		fChooser.getExtensionFilters().add(extFilterJPG);
 		File imageFile = fChooser.showOpenDialog(stage);
-<<<<<<< HEAD:GestorTramas_v3.0/src/tramas/notasCampaña/NotasCampañaController.java
-=======
-		
+
 		rectangle = EditorImagen.redimensionarArchivo(imageFile);
 		imagenPane.setCenter(rectangle);
-		aux=imageFile;
-		
-    }
-	
-		
-	@FXML
-    void onAgregarNotaButtonAction(ActionEvent event) throws FileNotFoundException {
-		Image image = new Image(aux.toURI().toString());
-//		cajaEditor.setHtmlText(cajaEditor.getHtmlText()+"<img src=\""+ aux.toURI()+  " \"width=\""+rectangle.getWidth()+"\"+ height=\""+rectangle.getHeight()+"\" >");
-		cajaEditor.setHtmlText(cajaEditor.getHtmlText()+"<img src=\""+"data:image/png;base64,"+ImageUtils.encodeImage(image) +  " \"width=\""+rectangle.getWidth()+"\"+ height=\""+rectangle.getHeight()+"\" >");
-    }
-	
-    @FXML
-    void onLimpiarButtonAction(ActionEvent event) {
->>>>>>> 57f6c314fab1f308de7bc604d942dd096783c768:GestorTramas_v2.0/src/tramas/notasCampaña/NotasCampañaController.java
-
-		if (imageFile != null) {
-			rectangle = EditorImagen.redimensionarArchivo(imageFile);
-			imagenPane.setCenter(rectangle);
-			aux = imageFile;
-		}
+		aux = imageFile;
 
 	}
 
@@ -201,13 +171,7 @@ public class NotasCampa�aController implements Initializable {
 	}
 
 	public void setMainController(CampaniaController mainController) {
-<<<<<<< HEAD:GestorTramas_v3.0/src/tramas/notasCampaña/NotasCampañaController.java
 		this.mainController = mainController;
-
-=======
-		this.mainController=mainController;
-		
->>>>>>> 57f6c314fab1f308de7bc604d942dd096783c768:GestorTramas_v2.0/src/tramas/notasCampaña/NotasCampañaController.java
 	}
 
 	public final ObjectProperty<Nota> notaGuardadaProperty() {
