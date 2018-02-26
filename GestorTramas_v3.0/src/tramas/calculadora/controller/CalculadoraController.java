@@ -19,6 +19,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import tramas.calculadora.logica.Calculadora;
 import tramas.model.Nota;
 import tramas.model.calculadora.CalculadoraModel;
@@ -146,13 +147,16 @@ public class CalculadoraController implements Initializable {
 	}
 	
 	public Calculadora show(Stage parentStage) {
+		Scene scene = new Scene(view);
+		scene.getStylesheets().add(getClass().getResource("/tramas/resources/style.css").toExternalForm());
 		stage = new Stage();
+		stage.getIcons().add(parentStage.getIcons().get(0));
 		if (parentStage !=null)
 		stage.initOwner(parentStage);
 		stage.initModality(Modality.APPLICATION_MODAL);
 		stage.setTitle("Roll Calculator");
 		stage.setResizable(true);
-		stage.setScene(new Scene(view, 800, 600));
+		stage.setScene(scene);
 		stage.showAndWait();
 		return calculadora;
 	}

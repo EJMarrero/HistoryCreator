@@ -18,23 +18,23 @@ public class PannableCanvas extends StackPane {
 		setPrefSize(600, 600);
 		setStyle("-fx-background-color: lightgrey; -fx-border-color: blue;");
 
-		// add scale transform
+		// bindea la escala a las coordenadas
 		scaleXProperty().bind(myScale);
 		scaleYProperty().bind(myScale);
 	}
 
 	/**
-	 * Add a grid to the canvas, send it to back
+	 * Añade una rejilla al fondo del panel
 	 */
 	public void addGrid() {
 
 		double w = getBoundsInLocal().getWidth();
 		double h = getBoundsInLocal().getHeight();
 
-		// add grid
+		// Añade el grid.
 		grid = new Canvas(w, h);
 
-		// don't catch mouse events
+		// Con este método evitamos que al pulsar sobre el grid se generen eventos del mouse
 		grid.setMouseTransparent(true);
 
 		GraphicsContext gc = grid.getGraphicsContext2D();
@@ -42,7 +42,7 @@ public class PannableCanvas extends StackPane {
 		gc.setStroke(Color.GRAY);
 		gc.setLineWidth(1);
 
-		// draw grid lines
+		// Dibuja la rejilla
 		double offset = 50;
 		for (double i = offset; i < w; i += offset) {
 			gc.strokeLine(i, 0, i, h);

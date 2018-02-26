@@ -35,7 +35,7 @@ public class NodeGestures {
 
 		public void handle(MouseEvent event) {
 
-			// left mouse button => dragging
+			// Si se mueve el botón primario actúa, si no, regresa 
 			if (!event.isPrimaryButtonDown())
 				return;
 			
@@ -109,7 +109,7 @@ public class NodeGestures {
 	private EventHandler<MouseEvent> onMouseDraggedEventHandler = new EventHandler<MouseEvent>() {
 		public void handle(MouseEvent event) {
 			
-			// left mouse button => dragging
+			// Si se mueve el botón primario actúa, si no, regresa  
 			if (!event.isPrimaryButtonDown())
 				return;
 			

@@ -3,6 +3,7 @@ package tramas.model.pizarra;
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
+import javafx.scene.layout.StackPane;
 
 public class SceneGestures {
 
@@ -11,9 +12,11 @@ public class SceneGestures {
 		private static final double MIN_SCALE = .1d;
 
 		private DragContext sceneDragContext = new DragContext();
-
+		
+		StackPane canvasStackPane;
 		PannableCanvas canvas;
 
+		
 		public SceneGestures(PannableCanvas canvas) {
 			this.canvas = canvas;
 		}
@@ -34,7 +37,7 @@ public class SceneGestures {
 
 			public void handle(MouseEvent event) {
 
-				// right mouse button => panning
+				// Si se presiona el botón derecho, actúa, si no, regresa
 				if (!event.isSecondaryButtonDown())
 					return;
 
@@ -51,7 +54,7 @@ public class SceneGestures {
 		private EventHandler<MouseEvent> onMouseDraggedEventHandler = new EventHandler<MouseEvent>() {
 			public void handle(MouseEvent event) {
 
-				// right mouse button => panning
+				// Si se presiona el botón derecho, actúa, si no, regresa
 				if (!event.isSecondaryButtonDown())
 					return;
 				
@@ -67,7 +70,7 @@ public class SceneGestures {
 		};
 
 		/**
-		 * Mouse wheel handler: zoom to pivot point
+		 * Evento sobre la rueda del ratón para hacer zoom sobre el panel
 		 */
 		private EventHandler<ScrollEvent> onScrollEventHandler = new EventHandler<ScrollEvent>() {
 
@@ -95,7 +98,7 @@ public class SceneGestures {
 
 				canvas.setScale(scale);
 
-				// note: pivot value must be untransformed, i. e. without scaling
+				// note: el pivot no puede ser transformado sin hacer primero escala.
 				canvas.setPivot(f * dx, f * dy);
 
 				event.consume();

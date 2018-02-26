@@ -5,13 +5,14 @@ import javafx.scene.ImageCursor;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 public class GestorApp extends Application {
 	
 	private static Image cursor;
 	private static Stage primaryStage;
 	
-	public MainController controller;
+	public SplashController controllerSplash;
 	
 	@Override
 	public void start(Stage primaryStage) throws Exception {
@@ -19,9 +20,13 @@ public class GestorApp extends Application {
 		
 		GestorApp.primaryStage = primaryStage;
 		
-		controller = new MainController();
-
-		Scene scene = new Scene(controller.getView(), 1650, 750);
+		/**
+		 * @author Claudio Roldán
+		 * A partir de este punto, el MainApp cargar un SplashScreen, y este 
+		 * a su vez, cargar el MainController mediante un hilo.
+		 */
+		controllerSplash = new SplashController();
+		Scene scene = new Scene(controllerSplash.getView());
 		
 		// INICIALIZAR AUDIO 
 		  
@@ -31,17 +36,13 @@ public class GestorApp extends Application {
 		mediaPlayer.play();*/
 		
 		// INICIALIZAR CURSORES
+		
 		scene.setCursor(new ImageCursor(GestorApp.getCursor()));
 		scene.getStylesheets().add(getClass().getResource("/tramas/resources/style.css").toExternalForm());
 
-//		primaryStage.setMaxHeight(768);
-//		primaryStage.setMaxWidth(1366);
-//		primaryStage.setMaximized(true);
-		
-		primaryStage.setTitle("GestorTramas_v.2.0");		
-		primaryStage.setFullScreenExitHint("");
+		primaryStage.centerOnScreen();
+		primaryStage.initStyle(StageStyle.UNDECORATED);
 		primaryStage.setScene(scene);
-		primaryStage.setFullScreen(true);
 		primaryStage.show();
 		
 	}
