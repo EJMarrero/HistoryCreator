@@ -5,7 +5,10 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
+<<<<<<< HEAD:GestorTramas_v3.0/src/tramas/model/Mapa.java
 import javafx.beans.property.ListProperty;
+=======
+>>>>>>> 57f6c314fab1f308de7bc604d942dd096783c768:GestorTramas_v2.0/src/tramas/model/Mapa.java
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleListProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -61,6 +64,7 @@ public class Mapa {
 	}
 	
 
+<<<<<<< HEAD:GestorTramas_v3.0/src/tramas/model/Mapa.java
 	public final ListProperty<Image> avataresProperty() {
 		return this.avatares;
 	}
@@ -75,13 +79,18 @@ public class Mapa {
 		this.avataresProperty().set(avatares);
 	}
 	
+=======
+>>>>>>> 57f6c314fab1f308de7bc604d942dd096783c768:GestorTramas_v2.0/src/tramas/model/Mapa.java
 	@Override
 	public String toString() {
 		return getNombre();
 	}
+<<<<<<< HEAD:GestorTramas_v3.0/src/tramas/model/Mapa.java
 
 	
 	
+=======
+>>>>>>> 57f6c314fab1f308de7bc604d942dd096783c768:GestorTramas_v2.0/src/tramas/model/Mapa.java
 	
 	
 }
