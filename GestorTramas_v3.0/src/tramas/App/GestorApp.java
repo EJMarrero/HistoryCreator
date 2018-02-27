@@ -16,6 +16,7 @@ public class GestorApp extends Application {
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
+		//hola
 		cursor = new Image("/tramas/resources/cursor.png");
 
 		GestorApp.primaryStage = primaryStage;
