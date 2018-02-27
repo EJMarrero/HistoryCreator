@@ -56,7 +56,6 @@ public class SplashController implements Initializable {
 				Thread.sleep(4000);
 
 				Platform.runLater(new Runnable() {
-
 					@Override
 					public void run() {
 						primaryStage = new Stage();
@@ -69,7 +68,7 @@ public class SplashController implements Initializable {
 						primaryStage.getIcons().add(new Image("/tramas/resources/d20.png"));
 						primaryStage.setFullScreenExitHint("");
 						primaryStage.setScene(scene);
-						primaryStage.setFullScreen(true);
+						primaryStage.setMaximized(true);
 						primaryStage.show();
 						view.getScene().getWindow().hide();
 

@@ -9,6 +9,7 @@ import java.util.ResourceBundle;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.value.ObservableValue;
+import javafx.css.PseudoClass;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -102,7 +103,7 @@ public class AventurasController implements Initializable {
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		new Scene(view);
-
+		
 		tableroController.setMainController(this);
 
 		pizarraController.setMainController(this);
@@ -206,7 +207,6 @@ public class AventurasController implements Initializable {
 
 	@FXML
 	void onAniadirTableroButtonAction(ActionEvent event) throws IOException {
-		// TODO cambiar a mi versión
     	stageCrearTablero = new Stage();
     	CargarTableroController tablero = new CargarTableroController();
     	tablero.setMainController(this);

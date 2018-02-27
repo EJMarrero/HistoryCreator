@@ -13,32 +13,29 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane fx:id="view" prefHeight="750.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane fx:id="view" prefHeight="750.0" prefWidth="1300.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <opaqueInsets>
       <Insets />
    </opaqueInsets>
    <center>
       <VBox fx:id="centroPane" alignment="CENTER" BorderPane.alignment="CENTER">
          <children>
-            <VBox alignment="CENTER" styleClass="MapaCampaniaBox" VBox.vgrow="ALWAYS">
+            <TextField fx:id="tituloCampaniaText" alignment="CENTER" maxWidth="200.0" promptText="Título de la campaña" styleClass="tituloCampania">
+               <VBox.margin>
+                  <Insets top="5.0" />
+               </VBox.margin>
+            </TextField>
+            <VBox alignment="TOP_CENTER" styleClass="MapaCampaniaBox" VBox.vgrow="ALWAYS">
                <children>
-                  <VBox fx:id="zonaMapa" alignment="CENTER" spacing="2.0" styleClass="zonaDeMapa" VBox.vgrow="NEVER">
+                  <VBox fx:id="zonaMapa" alignment="TOP_CENTER" spacing="2.0" styleClass="zonaDeMapa" VBox.vgrow="ALWAYS">
                      <children>
-                        <TextField fx:id="tituloCampaniaText" alignment="CENTER" maxWidth="300.0" promptText="Título de la campaña" styleClass="tituloCampania">
+                        <ImageView fx:id="mapaImage" fitHeight="260.0" fitWidth="631.0" opacity="0.66" pickOnBounds="true" preserveRatio="true" styleClass="mapaImage" VBox.vgrow="ALWAYS">
                            <VBox.margin>
-                              <Insets top="70.0" />
-                           </VBox.margin>
-                        </TextField>
-                        <ImageView fx:id="mapaImage" fitHeight="181.0" fitWidth="500.0" opacity="0.66" pickOnBounds="true" preserveRatio="true" styleClass="mapaImage" VBox.vgrow="NEVER">
-                           <VBox.margin>
-                              <Insets bottom="20.0" left="60.0" right="60.0" />
+                              <Insets left="50.0" right="50.0" top="50.0" />
                            </VBox.margin></ImageView>
-                        <HBox alignment="CENTER" spacing="5.0">
+                        <HBox alignment="BOTTOM_CENTER" spacing="5.0">
                            <children>
                               <Button fx:id="expandirMapaButton" mnemonicParsing="false" onAction="#onExpandirMapaButtonAction" prefWidth="98.0" text="Expandir" textAlignment="CENTER">
-                                 <cursor>
-                                    <Cursor fx:constant="DEFAULT" />
-                                 </cursor>
                                  <graphic>
                                     <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -48,9 +45,6 @@
                                  </graphic>
                               </Button>
                               <Button fx:id="borrarMapaButton" mnemonicParsing="false" onAction="#onBorrarMapaButtonAction" prefWidth="98.0" text="Borrar" textAlignment="CENTER">
-                                 <cursor>
-                                    <Cursor fx:constant="DEFAULT" />
-                                 </cursor>
                                  <graphic>
                                     <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -60,9 +54,6 @@
                                  </graphic>
                               </Button>
                               <Button fx:id="aniadirMapaButton" mnemonicParsing="false" onAction="#onAniadirMapaButtonAction" prefWidth="98.0" text="Añadir" textAlignment="CENTER">
-                                 <cursor>
-                                    <Cursor fx:constant="DEFAULT" />
-                                 </cursor>
                                  <graphic>
                                     <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -73,20 +64,23 @@
                               </Button>
                            </children>
                            <VBox.margin>
-                              <Insets bottom="80.0" />
+                              <Insets />
                            </VBox.margin>
                         </HBox>
                      </children>
                      <VBox.margin>
-                        <Insets top="10.0" />
+                        <Insets />
                      </VBox.margin>
                   </VBox>
-                  <HBox alignment="CENTER_LEFT" maxHeight="345.0" minHeight="307.0" prefHeight="307.0" prefWidth="1020.0">
+                  <HBox alignment="CENTER_LEFT">
                      <children>
-                        <VBox alignment="CENTER" fillWidth="false" prefWidth="300.0" spacing="5.0" styleClass="contenedorListaPersonajesPane" HBox.hgrow="NEVER">
+                        <VBox alignment="CENTER" fillWidth="false" spacing="5.0" styleClass="contenedorListaPersonajesPane" HBox.hgrow="NEVER">
                            <children>
                               <Label styleClass="titulos" text="Lista de Personajes" />
-                              <ListView fx:id="personajesCampaniaList" />
+                              <ListView fx:id="personajesCampaniaList" prefHeight="200.0">
+                                 <VBox.margin>
+                                    <Insets />
+                                 </VBox.margin></ListView>
                               <HBox alignment="CENTER" spacing="5.0">
                                  <children>
                                     <Button fx:id="importarPersonajesButton" mnemonicParsing="false" onAction="#onImportarPersonajesButtonAction" prefWidth="40.0" textAlignment="CENTER">
@@ -144,7 +138,7 @@
                               <Insets />
                            </HBox.margin>
                            <padding>
-                              <Insets bottom="40.0" left="-45.0" right="-10.0" top="35.0" />
+                              <Insets bottom="35.0" left="5.0" right="40.0" top="35.0" />
                            </padding>
                         </VBox>
                         <FlowPane alignment="CENTER" columnHalignment="CENTER" hgap="60.0" prefWrapLength="500.0" styleClass="tableroPane" HBox.hgrow="ALWAYS">
@@ -178,7 +172,7 @@
                               </Button>
                            </children>
                            <HBox.margin>
-                              <Insets right="10.0" />
+                              <Insets />
                            </HBox.margin>
                         </FlowPane>
                      </children>
@@ -198,18 +192,15 @@
       </VBox>
    </center>
    <left>
-      <VBox alignment="CENTER" spacing="10.0" styleClass="izquierdaPane" BorderPane.alignment="CENTER">
+      <VBox alignment="TOP_CENTER" spacing="5.0" styleClass="izquierdaPane">
          <children>
-            <VBox alignment="CENTER" spacing="5.0" styleClass="NotasCampaniaPane">
+            <VBox alignment="TOP_CENTER" spacing="5.0" styleClass="NotasCampaniaPane">
                <children>
                   <Label styleClass="titulos" text="Notas de la Campaña" />
                   <ListView fx:id="notasCampaniaList" />
                   <HBox alignment="CENTER" spacing="5.0">
                      <children>
                         <Button fx:id="aniadirNotasCampaniaButton" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#onAniadirNotasCampaniaButtonAction" prefWidth="40.0" textAlignment="CENTER">
-                           <cursor>
-                              <Cursor fx:constant="DEFAULT" />
-                           </cursor>
                            <graphic>
                               <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -219,9 +210,6 @@
                            </graphic>
                         </Button>
                         <Button fx:id="abrirNotasCampaniaButton" mnemonicParsing="false" onAction="#onAbrirNotasCampaniaButtonAction" prefWidth="40.0" textAlignment="CENTER">
-                           <cursor>
-                              <Cursor fx:constant="DEFAULT" />
-                           </cursor>
                            <graphic>
                               <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -231,9 +219,6 @@
                            </graphic>
                         </Button>
                         <Button fx:id="borrarNotasCampaniaButton" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#onBorrarNotasCampaniaButtonAction" prefWidth="40.0" textAlignment="CENTER">
-                           <cursor>
-                              <Cursor fx:constant="DEFAULT" />
-                           </cursor>
                            <graphic>
                               <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -249,16 +234,13 @@
                   <Insets />
                </VBox.margin>
             </VBox>
-            <VBox alignment="CENTER" spacing="5.0" styleClass="AventurasPane">
+            <VBox alignment="TOP_CENTER" spacing="5.0" styleClass="AventurasPane">
                <children>
                   <Label styleClass="titulos" text="Aventuras" />
                   <ListView fx:id="aventurasCampaniaList" />
                   <HBox alignment="CENTER" spacing="5.0" VBox.vgrow="ALWAYS">
                      <children>
                         <Button fx:id="aniadirAventurasButton" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#onAniadirAventurasButtonAction" prefWidth="40.0" textAlignment="CENTER">
-                           <cursor>
-                              <Cursor fx:constant="DEFAULT" />
-                           </cursor>
                            <graphic>
                               <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -268,9 +250,6 @@
                            </graphic>
                         </Button>
                         <Button fx:id="verAventurasButton" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#onVerAventurasButtonAction" prefWidth="40.0" textAlignment="CENTER">
-                           <cursor>
-                              <Cursor fx:constant="DEFAULT" />
-                           </cursor>
                            <graphic>
                               <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -280,9 +259,6 @@
                            </graphic>
                         </Button>
                         <Button fx:id="borrarAventurasButton" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#onBorrarAventurasButtonAction" prefWidth="40.0" textAlignment="CENTER">
-                           <cursor>
-                              <Cursor fx:constant="DEFAULT" />
-                           </cursor>
                            <graphic>
                               <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -303,7 +279,7 @@
             <Insets />
          </BorderPane.margin>
          <padding>
-            <Insets bottom="70.0" left="2.0" right="35.0" top="70.0" />
+            <Insets bottom="75.0" left="5.0" right="40.0" top="75.0" />
          </padding>
       </VBox>
    </left>

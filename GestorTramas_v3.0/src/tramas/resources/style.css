@@ -204,10 +204,18 @@
 }
 
 .tituloCampania{
-	-fx-font-family: 'Arial';
+	-fx-background-image: url(chapita.png);
+	-fx-background-size: stretch;
+	-fx-text-fill: black;
+	-fx-font-family:'ColdCrush';
+	-fx-font-style: italic;
 	-fx-text-fill: white;
-	-fx-font-size: 16px;
+	-fx-font-size: 12px;
 	-fx-background-color: transparent;
+}
+
+.tituloCampania:hover{
+	-fx-effect: dropshadow( gaussian , rgba(0,0,0,0.75) , 4,0,0,1 );
 }
 
 .atrasPane{
@@ -281,15 +289,13 @@
 	-fx-background-size: stretch;
 	-fx-text-fill: black;
 	-fx-font-family:'ColdCrush';
+	-fx-background-color: transparent;
 }
+
 
 .tituloAventuraPane:hover{
 	-fx-effect: dropshadow( gaussian , rgba(0,0,0,0.75) , 4,0,0,1 );
 
-}
-
-.tituloAventuraPane:focused{
-	-fx-effect: dropshadow( gaussian , rgba(0,23,0,0.75) , 4,0,0,1 );
 }
 
 
