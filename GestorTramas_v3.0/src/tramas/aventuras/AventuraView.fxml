@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.geometry.Rectangle2D?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
@@ -21,50 +22,52 @@
                   <Insets left="5.0" top="5.0" />
                </BorderPane.margin>
                <children>
-                  <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS">
+                  <HBox VBox.vgrow="NEVER">
                      <children>
-                        <VBox fx:id="AventuraVBOX" alignment="TOP_CENTER" spacing="20.0" styleClass="AventuraPane" HBox.hgrow="ALWAYS">
+                        <VBox fx:id="AventuraVBOX" alignment="TOP_CENTER" maxHeight="350.0" maxWidth="500.0" minHeight="350.0" minWidth="500.0" prefHeight="350.0" prefWidth="500.0" spacing="20.0" styleClass="AventuraPane" HBox.hgrow="ALWAYS">
                            <children>
                               <TextField fx:id="tituloAventuraText" alignment="CENTER" maxWidth="150.0" opacity="0.85" styleClass="tituloAventuraPane">
                                  <cursor>
                                     <Cursor fx:constant="TEXT" />
                                  </cursor></TextField>
-                              <ImageView fx:id="portraitImage" fitHeight="220.0" fitWidth="300.0" pickOnBounds="true" preserveRatio="true" styleClass="imagenAventura" VBox.vgrow="NEVER">
+                              <ImageView fx:id="portraitImage" fitHeight="221.0" fitWidth="342.0" pickOnBounds="true" preserveRatio="true" styleClass="imagenAventura" VBox.vgrow="NEVER">
                                  <image>
                                     <Image url="@../resources/1.png" />
                                  </image>
+                                 <viewport>
+                                    <Rectangle2D />
+                                 </viewport>
                               </ImageView>
-                              <HBox alignment="CENTER" fillHeight="false" spacing="10.0">
-                                 <children>
-                                    <Button fx:id="cambiarPortraitAventuraButton" mnemonicParsing="false" onAction="#onCambiarPortraitAventuraButtonAction" styleClass="aventuraButtons">
-                                       <graphic>
-                                          <ImageView fitHeight="15.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" styleClass="aventuraButtons">
-                                             <image>
-                                                <Image url="@../resources/aniadir.png" />
-                                             </image>
-                                          </ImageView>
-                                       </graphic></Button>
-                                    <Button fx:id="borrarPortraitAventuraButton" mnemonicParsing="false" onAction="#onBorrarPortraitAventuraButton" styleClass="aventuraButtons">
-                                       <graphic>
-                                          <ImageView fitHeight="15.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" styleClass="aventuraButtons">
-                                             <image>
-                                                <Image url="@../resources/deleteIcon.png" />
-                                             </image>
-                                          </ImageView>
-                                       </graphic></Button>
-                                 </children>
-                                 <padding>
-                                    <Insets bottom="2.0" left="9.0" right="10.0" top="10.0" />
-                                 </padding>
-                                 <VBox.margin>
-                                    <Insets />
-                                 </VBox.margin>
-                              </HBox>
                            </children>
                         </VBox>
                      </children>
                   </HBox>
-                  <HBox layoutX="10.0" layoutY="10.0" spacing="10.0">
+                  <HBox alignment="BOTTOM_CENTER" fillHeight="false" spacing="10.0" VBox.vgrow="NEVER">
+                     <children>
+                        <Button fx:id="cambiarPortraitAventuraButton" mnemonicParsing="false" onAction="#onCambiarPortraitAventuraButtonAction" styleClass="aventuraButtons">
+                           <graphic>
+                              <ImageView fitHeight="15.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" styleClass="aventuraButtons">
+                                 <image>
+                                    <Image url="@../resources/aniadir.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Button fx:id="borrarPortraitAventuraButton" mnemonicParsing="false" onAction="#onBorrarPortraitAventuraButton" styleClass="aventuraButtons">
+                           <graphic>
+                              <ImageView fitHeight="15.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" styleClass="aventuraButtons">
+                                 <image>
+                                    <Image url="@../resources/deleteIcon.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                     </children>
+                     <VBox.margin>
+                        <Insets top="-38.0" />
+                     </VBox.margin>
+                  </HBox>
+                  <HBox layoutX="10.0" layoutY="10.0" spacing="10.0" VBox.vgrow="NEVER">
                      <children>
                         <VBox alignment="CENTER" spacing="2.0">
                            <children>
@@ -103,7 +106,7 @@
                               </HBox>
                            </children>
                         </VBox>
-                        <VBox fx:id="NotasAventuraVBox" alignment="CENTER" spacing="2.0">
+                        <VBox fx:id="NotasAventuraVBox" alignment="BOTTOM_CENTER" spacing="2.0" HBox.hgrow="NEVER">
                            <children>
                               <Label styleClass="titulosAventura" text="Notas de la Aventura" />
                               <ListView fx:id="notasAventuraListView" styleClass="listViewAventura" />

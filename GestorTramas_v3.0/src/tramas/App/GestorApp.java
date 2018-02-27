@@ -16,14 +16,13 @@ public class GestorApp extends Application {
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		//hola
 		cursor = new Image("/tramas/resources/cursor.png");
 
 		GestorApp.primaryStage = primaryStage;
 
 		/**
-		 * @author Claudio Roldán A partir de este punto, el MainApp cargar un
-		 *         SplashScreen, y este a su vez, cargar el MainController mediante un
+		 * @author Claudio Roldán A partir de este punto, el MainApp cargará un
+		 *         SplashScreen, y este a su vez, cargará el MainController mediante un
 		 *         hilo.
 		 */
 		controllerSplash = new SplashController();
@@ -44,6 +43,7 @@ public class GestorApp extends Application {
 
 		primaryStage.centerOnScreen();
 		primaryStage.initStyle(StageStyle.UNDECORATED);
+		primaryStage.getIcons().add(new Image("/tramas/resources/d20.png"));
 		primaryStage.setTitle("GestorTramas_v.3.0");
 		primaryStage.setScene(scene);
 		primaryStage.show();

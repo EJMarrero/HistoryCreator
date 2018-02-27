@@ -22,14 +22,14 @@
          <children>
             <TextField fx:id="tituloCampaniaText" alignment="CENTER" maxWidth="200.0" promptText="Título de la campaña" styleClass="tituloCampania">
                <VBox.margin>
-                  <Insets top="5.0" />
+                  <Insets bottom="-15.0" top="5.0" />
                </VBox.margin>
             </TextField>
             <VBox alignment="TOP_CENTER" styleClass="MapaCampaniaBox" VBox.vgrow="ALWAYS">
                <children>
-                  <VBox fx:id="zonaMapa" alignment="TOP_CENTER" spacing="2.0" styleClass="zonaDeMapa" VBox.vgrow="ALWAYS">
+                  <VBox fx:id="zonaMapa" alignment="TOP_CENTER" spacing="2.0" styleClass="zonaDeMapa" VBox.vgrow="NEVER">
                      <children>
-                        <ImageView fx:id="mapaImage" fitHeight="260.0" fitWidth="631.0" opacity="0.66" pickOnBounds="true" preserveRatio="true" styleClass="mapaImage" VBox.vgrow="ALWAYS">
+                        <ImageView fx:id="mapaImage" fitHeight="260.0" fitWidth="684.0" opacity="0.66" pickOnBounds="true" preserveRatio="true" VBox.vgrow="ALWAYS">
                            <VBox.margin>
                               <Insets left="50.0" right="50.0" top="50.0" />
                            </VBox.margin></ImageView>
@@ -64,7 +64,7 @@
                               </Button>
                            </children>
                            <VBox.margin>
-                              <Insets />
+                              <Insets bottom="35.0" />
                            </VBox.margin>
                         </HBox>
                      </children>
@@ -72,7 +72,7 @@
                         <Insets />
                      </VBox.margin>
                   </VBox>
-                  <HBox alignment="CENTER_LEFT">
+                  <HBox alignment="BOTTOM_CENTER" VBox.vgrow="ALWAYS">
                      <children>
                         <VBox alignment="CENTER" fillWidth="false" spacing="5.0" styleClass="contenedorListaPersonajesPane" HBox.hgrow="NEVER">
                            <children>
