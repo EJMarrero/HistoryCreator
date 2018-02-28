@@ -43,7 +43,7 @@
    
                               <ToolBar>
                 <HBox alignment="CENTER" spacing="10.0">
-                    <TextField fx:id="brushSize" maxWidth="40.0" styleClass="pixelesField" text="18">
+                    <TextField fx:id="brushSize" maxWidth="60.0" styleClass="pixelesField" text="18">
                   <HBox.margin>
                      <Insets right="-10.0" />
                   </HBox.margin></TextField>
@@ -88,10 +88,7 @@
    <center>
       <StackPane fx:id="contenedorPizarra" BorderPane.alignment="CENTER">
          <children>
-              <Canvas fx:id="canvas" height="2000.0" width="2000.0">
-               <StackPane.margin>
-                  <Insets />
-               </StackPane.margin></Canvas>
+              <Canvas fx:id="canvas" height="4000.0" width="4000.0" />
             <ImageView fx:id="contenedorMapa" pickOnBounds="true" preserveRatio="true" />
          </children>
       </StackPane>

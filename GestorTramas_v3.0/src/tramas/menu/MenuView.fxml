@@ -55,15 +55,17 @@
             </ImageView>
          </graphic>
     </Menu>
-    <Menu mnemonicParsing="false" text="Edit">
+    <Menu mnemonicParsing="false" text="Exportar">
       <items>
         <MenuItem mnemonicParsing="false" onAction="#onImprimirMenuAction" text="Imprimir" />
       </items>
-    </Menu>
-    <Menu mnemonicParsing="false" text="Help">
-      <items>
-        <MenuItem mnemonicParsing="false" text="About" />
-      </items>
+         <graphic>
+            <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../resources/importacion.png" />
+               </image>
+            </ImageView>
+         </graphic>
     </Menu>
   </menus>
 </MenuBar>
