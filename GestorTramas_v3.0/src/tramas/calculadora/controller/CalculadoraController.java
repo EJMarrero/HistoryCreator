@@ -3,8 +3,6 @@ package tramas.calculadora.controller;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import javafx.beans.binding.Bindings;
 import javafx.beans.value.ChangeListener;
@@ -21,7 +19,6 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import tramas.calculadora.logica.Calculadora;
-import tramas.model.Nota;
 import tramas.model.calculadora.CalculadoraModel;
 
 public class CalculadoraController implements Initializable {
@@ -60,16 +57,15 @@ public class CalculadoraController implements Initializable {
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		pantallaEntrada.textProperty().bindBidirectional(model.pantallaEntradaProperty());
 		pantallaSalida.textProperty().bindBidirectional(model.pantallaSalidaProperty());
-//		ceroButton.textProperty().bindBidirectional(model.ceroProperty());
-//		unoButton.textProperty().bindBidirectional(model.unoProperty());
-//		dosButton.textProperty().bindBidirectional(model.dosProperty());
-//		tresButton.textProperty().bindBidirectional(model.tresProperty());
-//		cuatroButton.textProperty().bindBidirectional(model.cuatroProperty());
-//		cincoButton.textProperty().bindBidirectional(model.cincoProperty());
-//		seisButton.textProperty().bindBidirectional(model.seisProperty());
-//		sieteButton.textProperty().bindBidirectional(model.sieteProperty());
-//		ochoButton.textProperty().bindBidirectional(model.ochoProperty());
-//		nueveButton.textProperty().bindBidirectional(model.nueveProperty());
+
+		/**
+		 * Se desactivan las operaciones de (*,/,+,-) para esta versión
+		 */		
+		multiplicarButton.setDisable(true);
+		restarButton.setDisable(true);
+		dividirButton.setDisable(true);
+		sumarButton.setDisable(true);
+		
 		Bindings.bindBidirectional(model.unoProperty(), unoButton.textProperty());
 		Bindings.bindBidirectional(model.dosProperty(), dosButton.textProperty());
 		Bindings.bindBidirectional(model.tresProperty(), tresButton.textProperty());
@@ -104,7 +100,6 @@ public class CalculadoraController implements Initializable {
 	
 	@FXML
 	void borrar(ActionEvent event) {
-//		calculadora.borrar();
 	}
 
 	@FXML
@@ -132,10 +127,8 @@ public class CalculadoraController implements Initializable {
 	@FXML
 	void operar(ActionEvent event) {
 		Button boton = (Button) event.getSource();
-//		char [] caracteres = boton.getText().toCharArray();
 		calculadora.operar(boton.getText());
 		System.out.println(boton.getText());
-//		calculadora.operar(caracteres[0]);
 		getPantallaEntrada();
 	}
 	
@@ -152,8 +145,9 @@ public class CalculadoraController implements Initializable {
 		stage = new Stage();
 		stage.getIcons().add(parentStage.getIcons().get(0));
 		if (parentStage !=null)
-		stage.initOwner(parentStage);
-		stage.initModality(Modality.APPLICATION_MODAL);
+			stage.initOwner(parentStage);
+		stage.initStyle(StageStyle.UTILITY);
+		stage.initModality(Modality.NONE);
 		stage.setTitle("Roll Calculator");
 		stage.setResizable(true);
 		stage.setScene(scene);
