@@ -41,7 +41,9 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.FileChooser.ExtensionFilter;
 import tramas.App.GestorApp;
+import tramas.App.SplashController;
 import tramas.aventuras.AventurasController;
+import tramas.calculadora.controller.CalculadoraController;
 import tramas.campania.CampaniaController;
 import tramas.editorImagen.EditorImagen;
 import tramas.menu.MenuController;
@@ -221,6 +223,12 @@ public class TableroController implements Initializable {
     void onBackButtonAction(ActionEvent event) {
     	g.clearRect(0, 0, contenedorPizarra.getWidth(), contenedorPizarra.getHeight());
 		stage.close();
+    }
+    
+    @FXML
+    void onRollMenuItemAction(ActionEvent event) throws IOException {
+    	CalculadoraController controller = new CalculadoraController();
+		controller.show(SplashController.getPrimaryStage());
     }
 
     @FXML

@@ -10,6 +10,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToolBar?>
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.input.KeyCodeCombination?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
@@ -20,8 +21,19 @@
         <VBox fx:id="cajaSuperior" BorderPane.alignment="CENTER">
             <MenuBar>
                 <Menu text="Opciones">
-                    <MenuItem onAction="#onSave" text="Guardar captura..." />
-                    <MenuItem onAction="#onExit" text="Volver a Campaña" />
+                    <MenuItem onAction="#onSave" text="Guardar captura...">
+                  <accelerator>
+                     <KeyCodeCombination alt="UP" code="I" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                  </accelerator></MenuItem>
+               <MenuItem mnemonicParsing="false" onAction="#onRollMenuItemAction" text="Roll...">
+                  <accelerator>
+                     <KeyCodeCombination alt="UP" code="R" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                  </accelerator>
+               </MenuItem>
+                    <MenuItem onAction="#onExit" text="Volver a Campaña">
+                  <accelerator>
+                     <KeyCodeCombination alt="UP" code="B" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                  </accelerator></MenuItem>
                 </Menu>
             </MenuBar>
    
