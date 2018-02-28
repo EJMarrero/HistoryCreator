@@ -23,6 +23,8 @@ import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -30,6 +32,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -37,7 +40,10 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.stage.FileChooser;
+import javafx.util.Callback;
 import tramas.App.MainController;
 import tramas.App.SplashController;
 import tramas.calculadora.controller.CalculadoraController;
@@ -96,7 +102,23 @@ public class CampaniaController implements Initializable {
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		/**
-		 * @author Claudio Roldán Se utiliza la clase AventuraListCell para factorizar
+		 * @author Claudio Roldán. Evento que se dispara y lanza un efecto de sonido, se utiliza
+		 *         para eventos del Mouse.
+		 */
+		EventHandler<Event> efectoButton = new EventHandler<Event>() {
+			@Override
+			public void handle(Event event) {
+				Media sound = new Media(new File("botoneffecto.mp3").toURI().toString());
+				MediaPlayer mediaPlayer = new MediaPlayer(sound);
+				mediaPlayer.setVolume(0.2);
+				mediaPlayer.play();
+			}
+		};
+		
+		aventurasCampaniaList.getFocusModel().focusedItemProperty();
+
+		/**
+		 * @author Claudio Roldán. Se utiliza la clase AventuraListCell para factorizar
 		 *         las celdas con el avatar de la aventura
 		 * 
 		 */
@@ -121,26 +143,10 @@ public class CampaniaController implements Initializable {
 
 		borrarMapaButton.disableProperty().bind(mapaImageModel.isNull());
 
-		// BooleanBinding desactivarMapa =
-		// campania.get().mapaCampaniaProperty().isNull();
-		// guardarMapaButton.disableProperty().bind(desactivarMapa);
-		// expandirMapaButton.disableProperty().bind(desactivarMapa);
-		// borrarMapaButton.disableProperty().bind(desactivarMapa);
-
-		// EventHandler<Event> efectoButton = new EventHandler<Event>() {
-		// @Override
-		// public void handle(Event event) {
-		// Media sound = new Media(new File("botoneffecto.mp3").toURI().toString());
-		// MediaPlayer mediaPlayer = new MediaPlayer(sound);
-		// mediaPlayer.setVolume(0.2);
-		// mediaPlayer.play();
-		// }
-		// };
-		//
-		// aniadirNotasCampaniaButton.setOnMouseClicked(efectoButton);
-		// aniadirAventurasButton.setOnMouseClicked(efectoButton);
-		// aniadirPersonajesButton.setOnMouseClicked(efectoButton);
-		// aniadirMapaButton.setOnMouseClicked(efectoButton);
+		aniadirNotasCampaniaButton.setOnMouseClicked(efectoButton);
+		aniadirAventurasButton.setOnMouseClicked(efectoButton);
+		aniadirPersonajesButton.setOnMouseClicked(efectoButton);
+		aniadirMapaButton.setOnMouseClicked(efectoButton);
 
 		// Botones deshabilitados en esta versión:
 		compendioButton.setDisable(true);
