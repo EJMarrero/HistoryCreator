@@ -539,4 +539,31 @@
 -fx-background-size: stretch;
 }
 
+/* Componentes de Canvas */
+.componentesCanvas {
+	-fx-background-color: 
+        #090a0c,
+        linear-gradient(#38424b 0%, #1f2429 20%, #191d22 100%),
+        linear-gradient(#20262b, #191d22),
+        radial-gradient(center 50% 0%, radius 100%, rgba(114,131,148,0.9), rgba(255,255,255,0));
+    -fx-background-radius: 5,4,3,5;
+    -fx-background-insets: 0,1,2,0;
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
+    -fx-padding: 10 10 10 10;
+}
+
+.componentesCanvas .label{
+-fx-text-fill: white;
+	
+}
+
+.tool-bar{
+	-fx-background-color: linear-gradient( from 0.0% 0.0% to 100.0% 100.0%, rgb(255,255,255) 0.0, rgb(0,0,0) 100.0);
+}
+
+.pixelesField{
+	-fx-font-family: 'Verdana';
+	-fx-font-size: 15px;
+}
+
 

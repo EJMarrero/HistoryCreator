@@ -41,7 +41,7 @@ import javafx.stage.FileChooser;
 import tramas.App.MainController;
 import tramas.App.SplashController;
 import tramas.calculadora.controller.CalculadoraController;
-import tramas.campania.mapa.MapaCampaniaController;
+import tramas.canvas.tablero.TableroController;
 import tramas.model.Aventura;
 import tramas.model.Campania;
 //import tramas.model.Mapa;
@@ -76,7 +76,7 @@ public class CampaniaController implements Initializable {
 			aniadirPersonajesButton, verPersonajesButton, borrarPersonajesButton, tesorosButton;
 
 	// SubControladores
-	private MapaCampaniaController mapaController = new MapaCampaniaController();
+	private TableroController mapaController = new TableroController();
 	private NotasCampañaController notasCampañaController = new NotasCampañaController();
 
 	// Modelo

@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.canvas.Canvas?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ColorPicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.input.KeyCodeCombination?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane fx:id="view" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+   <top>
+        <VBox fx:id="cajaSuperior" BorderPane.alignment="CENTER">
+            <MenuBar>
+                <Menu text="Opciones">
+                    <MenuItem onAction="#onSave" text="Guardar captura...">
+                  <accelerator>
+                     <KeyCodeCombination alt="UP" code="I" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                  </accelerator></MenuItem>
+               <MenuItem mnemonicParsing="false" onAction="#onRollMenuItemAction" text="Roll...">
+                  <accelerator>
+                     <KeyCodeCombination alt="UP" code="R" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                  </accelerator>
+               </MenuItem>
+                    <MenuItem onAction="#onExit" text="Volver a Campaña">
+                  <accelerator>
+                     <KeyCodeCombination alt="UP" code="B" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                  </accelerator></MenuItem>
+                </Menu>
+            </MenuBar>
+   
+                              <ToolBar>
+                <HBox alignment="CENTER" spacing="10.0">
+                    <TextField fx:id="brushSize" maxWidth="40.0" styleClass="pixelesField" text="18">
+                  <HBox.margin>
+                     <Insets right="-10.0" />
+                  </HBox.margin></TextField>
+               <Label text="px">
+                  <HBox.margin>
+                     <Insets />
+                  </HBox.margin>
+               </Label>
+                    <ColorPicker fx:id="colorPicker" prefHeight="50.0" styleClass="componentesCanvas" />
+                    <CheckBox fx:id="eraser" prefHeight="50.0" styleClass="componentesCanvas">
+                  <graphic>
+                     <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" styleClass="botonesTablero">
+                        <image>
+                           <Image url="@../../resources/goma-de-borrar.png" />
+                        </image>
+                     </ImageView>
+                  </graphic></CheckBox>
+               <Separator orientation="VERTICAL" />
+               <Button mnemonicParsing="false" onAction="#onLimpiarButtonAction" prefHeight="20.0" text="Limpiar Pizarra" />
+               <Button mnemonicParsing="false" onAction="#onCargarImagenButtonAction">
+                  <graphic>
+                     <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                        <image>
+                           <Image url="@../../resources/imagen.png" />
+                        </image>
+                     </ImageView>
+                  </graphic>
+               </Button>
+               <Button mnemonicParsing="false" onAction="#onBackButtonAction">
+                  <graphic>
+                     <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                        <image>
+                           <Image url="@../../resources/flecha-atras.png" />
+                        </image>
+                     </ImageView>
+                  </graphic>
+               </Button>
+                </HBox>
+            </ToolBar>
+        </VBox>
+   </top>
+   <center>
+      <StackPane fx:id="contenedorPizarra" BorderPane.alignment="CENTER">
+         <children>
+              <Canvas fx:id="canvas" height="2000.0" width="2000.0">
+               <StackPane.margin>
+                  <Insets />
+               </StackPane.margin></Canvas>
+            <ImageView fx:id="contenedorMapa" pickOnBounds="true" preserveRatio="true" />
+         </children>
+      </StackPane>
+   </center>
+</BorderPane>
