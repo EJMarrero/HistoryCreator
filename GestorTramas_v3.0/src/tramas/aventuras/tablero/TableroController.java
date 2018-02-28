@@ -54,9 +54,11 @@ import tramas.model.pizarra.PannableCanvas;
 import tramas.model.pizarra.SceneGestures;
 import tramas.notasCampaña.DragResizeMod;
 
+@SuppressWarnings("unused")
 public class TableroController implements Initializable {
 
 	// Referencia al controlador padre
+	@SuppressWarnings("unused")
 	private AventurasController aventurasController;
 	
 
@@ -99,7 +101,6 @@ public class TableroController implements Initializable {
 	Group group = new Group();
 	public PannableCanvas panelZoom = new PannableCanvas();
 	public NodeGestures nodeGestures = new NodeGestures(panelZoom);
-//	public SceneGestures scenegestures = new SceneGestures(canvas);
 	public ArrayList<ImagePattern> listaAvatares = new ArrayList<>();
 	public ObjectProperty<Rectangle> nuevoAvatar = new SimpleObjectProperty<>(this, "nuevoAvatar");
 	public GraphicsContext g;

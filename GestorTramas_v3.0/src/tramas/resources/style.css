@@ -37,7 +37,6 @@
 }
 
 
-/* PARA CAMBIAR LAS PROPIEDADES DE UN TEXT AREA, ES NECESARIO TRABAJAR SOBRE TODOS SUS NODOS HIJOS */
 .tituloAventura {
     -fx-background-color: transparent;
 }
@@ -207,10 +206,9 @@
 	-fx-background-image: url(chapita.png);
 	-fx-background-size: stretch;
 	-fx-text-fill: black;
-	-fx-font-family:'ColdCrush';
-	-fx-font-style: italic;
+	-fx-font-family:'Verdana';
 	-fx-text-fill: white;
-	-fx-font-size: 12px;
+	-fx-font-size: 16px;
 	-fx-background-color: transparent;
 }
 
@@ -288,7 +286,7 @@
 	-fx-background-image: url(chapita.png);
 	-fx-background-size: stretch;
 	-fx-text-fill: black;
-	-fx-font-family:'ColdCrush';
+	-fx-font-family:'Verdana';
 	-fx-background-color: transparent;
 }
 
@@ -531,6 +529,14 @@
 }
 
 
+/* Componentes de CargarTableroView */
 
+.cargarTableroView{
+-fx-border-width: 2px;
+-fx-border-color: black;
+-fx-border-radius: 3px;
+-fx-background-image: url(textureTablero.jpg);
+-fx-background-size: stretch;
+}
 
 
