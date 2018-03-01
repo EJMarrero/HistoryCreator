@@ -10,6 +10,7 @@ import java.util.Map;
 import java.util.ResourceBundle;
 
 
+import org.controlsfx.control.Notifications;
 import org.w3c.dom.Document;
 
 import javafx.application.Platform;
@@ -19,12 +20,16 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.MenuBar;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
+import javafx.util.Duration;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JRParameter;
 import net.sf.jasperreports.engine.JasperExportManager;
@@ -34,12 +39,14 @@ import net.sf.jasperreports.engine.util.JRLoader;
 import net.sf.jasperreports.engine.util.JRXmlUtils;
 import tramas.App.GestorApp;
 import tramas.App.MainController;
-import tramas.campania.CampaniaController;
+import tramas.App.SplashController;
 import tramas.model.Campania;
 
 public class MenuController implements Initializable {
 
 	private MainController mainController;
+	private Image check = new Image("/tramas/resources/check.png");
+	private ImageView checkIV = new ImageView(check);
 
 	// modelo
 	private ObjectProperty<Campania> campania = new SimpleObjectProperty<>(this, "campania", new Campania());
@@ -55,7 +62,8 @@ public class MenuController implements Initializable {
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		
+		checkIV.setFitHeight(60);
+		checkIV.setFitWidth(60);
 	}
 
 	@FXML
@@ -76,7 +84,7 @@ public class MenuController implements Initializable {
 			e1.printStackTrace();
 			// muestra un diálogo con el error
 			Alert error = new Alert(AlertType.ERROR);
-			error.initOwner(GestorApp.getPrimaryStage());
+			error.initOwner(SplashController.getPrimaryStage());
 			error.setTitle("Abrir historial");
 			error.setHeaderText("Error al abrir un historial.");
 			error.setContentText(e1.getMessage());
@@ -97,29 +105,47 @@ public class MenuController implements Initializable {
 			if (fichero != null) {
 				// se guarda la campaña en el fichero indicado
 				campania.get().save(fichero);
+				Notifications notificationSaved = Notifications.create()
+						.title("¡Campaña guardada!")
+						.text("Guardado en: "+fichero.getPath())
+						.graphic(checkIV)
+						.hideAfter(Duration.seconds(3))
+						.position(Pos.BASELINE_RIGHT);
+				notificationSaved.darkStyle();
+				notificationSaved.show();
 			}
 		} catch (Exception e1) {
 			e1.printStackTrace();
 			// muestra un diálogo con el error
-			Alert error = new Alert(AlertType.ERROR);
-			error.initOwner(GestorApp.getPrimaryStage());
-			error.setTitle("Guardar aventura");
-			error.setHeaderText("Error al guardar la aventura.");
-			error.setContentText(e1.getMessage());
-			error.showAndWait();
+			Notifications notificationSaved = Notifications.create()
+					.title("¡Error al guardar!")
+					.text("No se ha podido guardar la campaña")
+					.graphic(null)
+					.hideAfter(Duration.seconds(3))
+					.position(Pos.BASELINE_RIGHT);
+			notificationSaved.darkStyle();
+			notificationSaved.showError();
 		}
 	}
 
 	@FXML
 	void onNuevoMenuItemAction(ActionEvent event) {
 		Alert confirmacion = new Alert(AlertType.WARNING);
-		confirmacion.initOwner(GestorApp.getPrimaryStage());
+		confirmacion.initOwner(SplashController.getPrimaryStage());
 		confirmacion.setTitle("Nuevo Campaña");
 		confirmacion.setHeaderText("Se dispone a crear una nueva campaña.\nSi tiene información sin guardar se perderá para siempre.");
 		confirmacion.setContentText("¿Seguro que desea continuar?");
 		confirmacion.getButtonTypes().setAll(ButtonType.YES, ButtonType.NO);
 		if (confirmacion.showAndWait().get().equals(ButtonType.YES)) {
 			campania.set(new Campania());
+			Notifications notificationSaved = Notifications.create()
+					.title("¡Nueva Campaña!")
+					.text("Ha iniciado una nueva campaña")
+					.graphic(checkIV)
+					.hideAfter(Duration.seconds(3))
+					.position(Pos.BASELINE_RIGHT);
+			notificationSaved.darkStyle();
+			notificationSaved.show();
 		}
 	}
 
@@ -132,7 +158,7 @@ public class MenuController implements Initializable {
 	void onImprimirMenuAction(ActionEvent event) {
 		String nombreFichero = "";
 		Alert confirmacion = new Alert(AlertType.WARNING);
-		confirmacion.initOwner(GestorApp.getPrimaryStage());
+		confirmacion.initOwner(SplashController.getPrimaryStage());
 		confirmacion.setTitle("Nuevo Campaña");
 		confirmacion.setHeaderText("Se dispone a exportar a pdf su campaña.\nAntes de poder hacerlo, es necesario guardar los datos actuales");
 		confirmacion.setContentText("¿Desea guardar la campaña y continuar?");
@@ -143,7 +169,7 @@ public class MenuController implements Initializable {
 				FileChooser guardarDialog = new FileChooser();
 				guardarDialog.setInitialDirectory(new File("."));
 				guardarDialog.getExtensionFilters().add(new ExtensionFilter("Archivo XML (*.xml)", "*.xml"));
-				File fichero = guardarDialog.showSaveDialog(GestorApp.getPrimaryStage());
+				File fichero = guardarDialog.showSaveDialog(SplashController.getPrimaryStage());
 				// comprueba si se seleccionó un fichero en el diálogo (File) o se canceló
 				// (null)
 				if (fichero != null) {
