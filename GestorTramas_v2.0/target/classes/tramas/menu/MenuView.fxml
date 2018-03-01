@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SeparatorMenuItem?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+
+<MenuBar fx:id="menuPrincipal" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+  <menus>
+    <Menu mnemonicParsing="false" text="Archivo">
+      <items>
+        <MenuItem mnemonicParsing="false" onAction="#onNuevoMenuItemAction" text="Nuevo">
+               <graphic>
+                  <ImageView pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../resources/new-icon-16x16.png" />
+                     </image></ImageView>
+               </graphic></MenuItem>
+            <MenuItem mnemonicParsing="false" onAction="#onAbrirMenuItemAction" text="Abrir...">
+               <graphic>
+                  <ImageView pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../resources/open-icon-16x16.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </MenuItem>
+            <MenuItem mnemonicParsing="false" onAction="#onGuardarMenuItemAction" text="Guardar...">
+               <graphic>
+                  <ImageView pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../resources/save-icon-16x16.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </MenuItem>
+            <SeparatorMenuItem mnemonicParsing="false" />
+            <MenuItem mnemonicParsing="false" onAction="#onSalirMenuItemAction" text="Salir">
+               <graphic>
+                  <ImageView pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../resources/exit-icon-16x16.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </MenuItem>
+      </items>
+         <graphic>
+            <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../resources/d20.png" />
+               </image>
+            </ImageView>
+         </graphic>
+    </Menu>
+    <Menu mnemonicParsing="false" text="Exportar">
+      <items>
+        <MenuItem mnemonicParsing="false" onAction="#onImprimirMenuAction" text="Imprimir" />
+      </items>
+    </Menu>
+  </menus>
+</MenuBar>
