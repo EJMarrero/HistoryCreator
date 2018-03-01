@@ -124,6 +124,9 @@ public class TableroController implements Initializable {
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		scene = new Scene(view);
 		scene.getStylesheets().add(getClass().getResource("/tramas/resources/style.css").toExternalForm());
+		
+		//Aceleradores del ToolBar
+		
 				
 		// Se asigna Cursor normal cuando entra en zona de Herramientas
 		cajaSuperior.setOnMouseEntered(event -> scene.setCursor(cursor));

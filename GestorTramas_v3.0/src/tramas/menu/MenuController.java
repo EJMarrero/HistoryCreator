@@ -60,32 +60,42 @@ public class MenuController implements Initializable {
 
 	@FXML
 	void onAbrirMenuItemAction(ActionEvent event) {
-		try {
-			// abre el diálogo para abrir un fichero
-			FileChooser abrirDialog = new FileChooser();
-			abrirDialog.setInitialDirectory(new File("."));
-			abrirDialog.getExtensionFilters().add(new ExtensionFilter("Archivo XML (*.xml)", "*.xml"));
-			File fichero = abrirDialog.showOpenDialog(GestorApp.getPrimaryStage());
-			// comprueba si se seleccionó un fichero en el diálogo (File) o se canceló
-			// (null)
-			if (fichero != null) {
-				campania.set(Campania.load(fichero));
-				mainController.irACampania();
+		Alert confirmacion = new Alert(AlertType.WARNING);
+		confirmacion.initOwner(GestorApp.getPrimaryStage());
+		confirmacion.setTitle("Nuevo Campaña");
+		confirmacion.setHeaderText("¡Cuidado! Se dispone a abrir una campaña nueva.\n Se perderán los cambios realizados.");
+		confirmacion.setContentText("¿Desea guardar la campaña y continuar?");
+		confirmacion.getButtonTypes().setAll(ButtonType.YES, ButtonType.NO);
+			if (confirmacion.showAndWait().get().equals(ButtonType.YES)) {
+				onGuardarMenuItemAction(event);
+				try {
+					// abre el diálogo para abrir un fichero
+					FileChooser abrirDialog = new FileChooser();
+					abrirDialog.setInitialDirectory(new File("."));
+					abrirDialog.getExtensionFilters().add(new ExtensionFilter("Archivo XML (*.xml)", "*.xml"));
+					File fichero = abrirDialog.showOpenDialog(GestorApp.getPrimaryStage());
+					// comprueba si se seleccionó un fichero en el diálogo (File) o se canceló
+					// (null)
+					if (fichero != null) {
+						campania.set(Campania.load(fichero));
+						mainController.irACampania();
+					}
+				} catch (Exception e1) {
+					e1.printStackTrace();
+					// muestra un diálogo con el error
+					Alert error = new Alert(AlertType.ERROR);
+					error.initOwner(GestorApp.getPrimaryStage());
+					error.setTitle("Abrir historial");
+					error.setHeaderText("Error al abrir un historial.");
+					error.setContentText(e1.getMessage());
+					error.showAndWait();
+				}
 			}
-		} catch (Exception e1) {
-			e1.printStackTrace();
-			// muestra un diálogo con el error
-			Alert error = new Alert(AlertType.ERROR);
-			error.initOwner(GestorApp.getPrimaryStage());
-			error.setTitle("Abrir historial");
-			error.setHeaderText("Error al abrir un historial.");
-			error.setContentText(e1.getMessage());
-			error.showAndWait();
-		}
 	}
 
 	@FXML
 	void onGuardarMenuItemAction(ActionEvent event) {
+
 		try {
 			// abre el diálogo para guardar un fichero
 			FileChooser guardarDialog = new FileChooser();
@@ -108,6 +118,7 @@ public class MenuController implements Initializable {
 			error.setContentText(e1.getMessage());
 			error.showAndWait();
 		}
+		
 	}
 
 	@FXML

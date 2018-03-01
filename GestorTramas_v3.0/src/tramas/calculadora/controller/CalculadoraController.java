@@ -59,12 +59,15 @@ public class CalculadoraController implements Initializable {
 		pantallaSalida.textProperty().bindBidirectional(model.pantallaSalidaProperty());
 
 		/**
-		 * Se desactivan las operaciones de (*,/,+,-) para esta versión
+		 * Se desactivan las operaciones de (*,/,+,-, borrar, dx) para esta versión
 		 */		
 		multiplicarButton.setDisable(true);
 		restarButton.setDisable(true);
 		dividirButton.setDisable(true);
 		sumarButton.setDisable(true);
+		borrarButton.setDisable(true);
+		dxButton.setDisable(true);
+		
 		
 		Bindings.bindBidirectional(model.unoProperty(), unoButton.textProperty());
 		Bindings.bindBidirectional(model.dosProperty(), dosButton.textProperty());
