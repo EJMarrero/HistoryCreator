@@ -61,7 +61,7 @@
                            <graphic>
                               <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../resources/archivo-de-carga.png" />
+                                    <Image url="@../resources/importacion.png" />
                                  </image>
                               </ImageView>
                            </graphic></Button>

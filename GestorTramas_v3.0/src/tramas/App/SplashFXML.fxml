@@ -1,16 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ProgressBar?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
 
-
-<StackPane fx:id="view" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.111">
+<VBox id="VBoxSplash" fx:id="view" alignment="CENTER" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <ImageView fx:id="imagenSplash" fitHeight="450.0" fitWidth="650.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="imagenSplash" fitHeight="350.0" fitWidth="500.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../resources/SplashScreen.jpg" />
          </image>
       </ImageView>
+      <Pane styleClass="PaneSplash">
+         <children>
+            <ProgressBar fx:id="progressBar" prefHeight="15.0" prefWidth="500.0" progress="0.24" />
+         </children>
+         <VBox.margin>
+            <Insets />
+         </VBox.margin>
+      </Pane>
    </children>
-</StackPane>
+</VBox>

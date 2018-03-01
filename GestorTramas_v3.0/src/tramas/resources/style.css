@@ -14,6 +14,14 @@
 	-fx-background-size:cover;
 	-fx-font-family: IrishUncialfabeta-Bold;
 }
+/* Contenido de SplashScreen */
+.progress-bar .bar{
+	-fx-background-color: green;
+}
+
+.PaneSplash{
+	-fx-background-color: white;
+}
 
 .titulosAventura{
 	-fx-background-color: rgb(192,192,192);
@@ -288,6 +296,7 @@
 	-fx-text-fill: black;
 	-fx-font-family:'Verdana';
 	-fx-background-color: transparent;
+	-fx-text-fill:white;
 }
 
 
