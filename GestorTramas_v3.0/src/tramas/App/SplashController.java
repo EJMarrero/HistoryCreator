@@ -74,7 +74,7 @@ public class SplashController implements Initializable {
 		tarea = new Task<Void>() {
 			@Override
 			protected Void call() throws Exception {
-				int MAX = 800;
+				int MAX = 500;
 				for (int i = 0; i < MAX; i++) {
 					updateProgress(i, MAX);
 					Thread.sleep(10L);
