@@ -1,0 +1,16 @@
+tramas.App
+tramas.aventuras
+tramas.calculadora.controller
+tramas.calculadora.logica
+tramas.campania
+tramas.canvas.tablero
+tramas.editorImagen
+tramas.menu
+tramas.model
+tramas.model.adapter
+tramas.model.calculadora
+tramas.model.pizarra
+tramas.model.roll
+tramas.model.tesoros
+tramas.notasCampaña
+tramas.test
